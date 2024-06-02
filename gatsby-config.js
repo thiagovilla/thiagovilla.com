@@ -16,18 +16,7 @@ module.exports = {
         folder: process.env.GOOGLE_DOCS_FOLDER_ID,
       },
     },
-    "gatsby-plugin-google-gtag",
     "gatsby-plugin-image",
-    "gatsby-plugin-sitemap",
-    {
-      resolve: "gatsby-plugin-manifest",
-      options: {
-        icon: "src/images/icon.png",
-      },
-    },
-    "gatsby-plugin-mdx",
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -43,6 +32,20 @@ module.exports = {
         path: "./src/pages/",
       },
       __key: "pages",
+    },
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        mdxOptions: {
+          remarkPlugins: [
+            require("remark-gfm"),
+            require("remark-footnotes"),
+            require("remark-slug"),
+            require("remark-autolink-headings"),
+            require("remark-prism"),
+          ],
+        },
+      },
     },
   ],
 };
