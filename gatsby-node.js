@@ -2,39 +2,49 @@
  * @type {import('gatsby').GatsbyNode}
  */
 const fs = require("fs");
-const path = require("path");
+const p = require("path");
 
-const tempDir = path.join(__dirname, "./temp");
+const contentDir = p.join(__dirname, "./content");
 
-if (fs.existsSync(tempDir)) {
-  fs.rmSync(tempDir, { recursive: true });
-}
+const contentTypes = [
+  {
+    nodeType: "GoogleDocs",
+    getSlug: (node) => node.slug ?? node.name,
+    path: "blog",
+    getBody: (node) => node.markdown,
+    template: "Blog",
+  },
+];
 
-exports.createPages = async function ({ graphql }) {
-  const { data } = await graphql(`
-    query {
-      allGoogleDocs {
-        nodes {
-          path
-          markdown
-        }
-      }
-    }
-  `);
-  data.allGoogleDocs.nodes.forEach((node) =>
-    writeMdx("blog/" + node.path, node.markdown)
-  );
+exports.sourceNodes = function (gatsbyApi) {
+  contentTypes.forEach((cont) => {
+    gatsbyApi.getNodesByType(cont.nodeType).forEach((node) => {
+      node.slug = cont.getSlug(node);
+      node.contentFilePath = p.join(contentDir, cont.path, node.slug + ".mdx");
+      writeFileP(node.contentFilePath, cont.getBody(node));
+    });
+  });
+};
+
+module.exports.createPages = function (gatsbyApi) {
+  contentTypes.forEach((cont) => {
+    gatsbyApi.getNodesByType(cont.nodeType).forEach((node) => {
+      gatsbyApi.actions.createPage({
+        path: p.relative(contentDir, node.contentFilePath).slice(0, -4),
+        component: p.resolve(
+          `./src/templates/${cont.template}.jsx?__contentFilePath=${node.contentFilePath}`
+        ),
+        context: { slug: node.slug },
+      });
+    });
+  });
 };
 
 const noop = function () {};
 
-function writeMdx(path_, body) {
-  fs.mkdir(
-    path.join(tempDir, path.dirname(path_)),
-    { recursive: true },
-    (err) => {
-      if (err) throw err;
-      fs.writeFile(path.join(tempDir, path_) + ".mdx", body, noop);
-    }
-  );
+function writeFileP(path, body) {
+  fs.mkdir(p.dirname(path), { recursive: true }, (err) => {
+    if (err) throw err;
+    fs.writeFileSync(path, body, noop);
+  });
 }
