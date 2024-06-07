@@ -4,6 +4,8 @@
 const fs = require("fs");
 const p = require("path");
 
+const DRAFT_ENV = process.env.DRAFT_ENV === "true";
+
 const contentDir = p.join(__dirname, "./content");
 
 const contentTypes = [
@@ -13,30 +15,37 @@ const contentTypes = [
     path: "blog",
     getBody: (node) => node.markdown,
     template: "Blog",
+    isDraft: (node) => node.draft ?? true,
   },
 ];
 
 exports.sourceNodes = function (gatsbyApi) {
   contentTypes.forEach((cont) => {
-    gatsbyApi.getNodesByType(cont.nodeType).forEach((node) => {
-      node.slug = cont.getSlug(node);
-      node.contentFilePath = p.join(contentDir, cont.path, node.slug + ".mdx");
-      writeFileP(node.contentFilePath, cont.getBody(node));
-    });
+    gatsbyApi
+      .getNodesByType(cont.nodeType)
+      .filter((n) => DRAFT_ENV || !cont.isDraft(n))
+      .forEach((n) => {
+        n.slug = cont.getSlug(n);
+        n.contentFilePath = p.join(contentDir, cont.path, p.dirname(n.path), n.slug + ".mdx");
+        writeFileP(n.contentFilePath, cont.getBody(n));
+      });
   });
 };
 
 module.exports.createPages = function (gatsbyApi) {
   contentTypes.forEach((cont) => {
-    gatsbyApi.getNodesByType(cont.nodeType).forEach((node) => {
-      gatsbyApi.actions.createPage({
-        path: p.relative(contentDir, node.contentFilePath).slice(0, -4),
-        component: p.resolve(
-          `./src/templates/${cont.template}.jsx?__contentFilePath=${node.contentFilePath}`
-        ),
-        context: { slug: node.slug },
+    gatsbyApi
+      .getNodesByType(cont.nodeType)
+      .filter((n) => DRAFT_ENV || !cont.isDraft(n))
+      .forEach((n) => {
+        gatsbyApi.actions.createPage({
+          path: p.relative(contentDir, n.contentFilePath).slice(0, -4),
+          component: p.resolve(
+            `./src/templates/${cont.template}.jsx?__contentFilePath=${n.contentFilePath}`
+          ),
+          context: { slug: n.slug },
+        });
       });
-    });
   });
 };
 
