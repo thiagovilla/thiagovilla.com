@@ -1,59 +1,30 @@
-/**
- * @type {import('gatsby').GatsbyNode}
- */
-const fs = require("fs");
+const fs = require("fs/promises");
 const p = require("path");
 
 const DRAFT_ENV = process.env.DRAFT_ENV === "true";
 
-const contentDir = p.join(__dirname, "./content");
-
 const contentTypes = [
   {
     nodeType: "GoogleDocs",
-    getSlug: (node) => node.slug ?? node.name,
-    path: "blog",
-    getBody: (node) => node.markdown,
-    template: "Blog",
-    isDraft: (node) => node.draft ?? true,
+    getBody: (n) => n.markdown,
+    filter: (n) => DRAFT_ENV || (n.draft ?? true),
+    getPath: (n) => p.join(p.dirname(n.path), n.slug ?? n.name),
   },
 ];
 
 exports.sourceNodes = function (gatsbyApi) {
-  contentTypes.forEach((cont) => {
+  contentTypes.forEach((c) => {
     gatsbyApi
-      .getNodesByType(cont.nodeType)
-      .filter((n) => DRAFT_ENV || !cont.isDraft(n))
-      .forEach((n) => {
-        n.slug = cont.getSlug(n);
-        n.contentFilePath = p.join(contentDir, cont.path, p.dirname(n.path), n.slug + ".mdx");
-        writeFileP(n.contentFilePath, cont.getBody(n));
-      });
+      .getNodesByType(c.nodeType)
+      .filter(c.filter)
+      .forEach((n) => writeMdx(c.getPath(n), c.getBody(n)));
   });
 };
 
-module.exports.createPages = function (gatsbyApi) {
-  contentTypes.forEach((cont) => {
-    gatsbyApi
-      .getNodesByType(cont.nodeType)
-      .filter((n) => DRAFT_ENV || !cont.isDraft(n))
-      .forEach((n) => {
-        gatsbyApi.actions.createPage({
-          path: p.relative(contentDir, n.contentFilePath).slice(0, -4),
-          component: p.resolve(
-            `./src/templates/${cont.template}.jsx?__contentFilePath=${n.contentFilePath}`
-          ),
-          context: { slug: n.slug },
-        });
-      });
-  });
-};
-
-const noop = function () {};
-
-function writeFileP(path, body) {
-  fs.mkdir(p.dirname(path), { recursive: true }, (err) => {
-    if (err) throw err;
-    fs.writeFileSync(path, body, noop);
-  });
+async function writeMdx(path, body) {
+  templ = path.split("/")[path.startsWith("/") ? 1 : 0] ?? "default";
+  path = p.join(__dirname, "/src/pages", path + ".mdx");
+  body += `\nexport { default } from "${__dirname}/src/templates/${templ}";\n`;
+  await fs.mkdir(p.dirname(path), { recursive: true });
+  await fs.writeFile(path, body);
 }
