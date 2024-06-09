@@ -17,6 +17,7 @@
     "gatsby": "^4.25.9",
     "gatsby-plugin-image": "^2.25.0",
     "gatsby-plugin-mdx": "^4.4.0",
+    "gatsby-source-dropbox": "^0.2.3",
     "gatsby-source-filesystem": "^4.25.0",
     "gatsby-source-google-docs": "^2.3.0",
     "react": "^18.2.0",
