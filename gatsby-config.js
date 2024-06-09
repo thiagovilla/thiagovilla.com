@@ -47,5 +47,13 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: "gatsby-source-dropbox",
+      options: {
+        accessToken: process.env.DROPBOX_ACCESS_TOKEN,
+        extensions: [".mdx"],
+        recursive: true,
+      },
+    },
   ],
 };
