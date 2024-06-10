@@ -55,5 +55,13 @@ module.exports = {
         recursive: true,
       },
     },
+    {
+      resolve: "gatsby-source-datocms",
+      options: {
+        apiToken: process.env.DATOCMS_API_TOKEN,
+        previewMode: process.env.DRAFT_ENV === "true",
+      },
+    },
+    "gatsby-transformer-remark",
   ],
 };
