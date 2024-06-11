@@ -7,11 +7,12 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "DROPBOX_ACCESS_TOKEN=$(./get-dbx-at.sh) && gatsby develop",
     "start": "gatsby develop",
-    "build": "mkdir content && gatsby build",
+    "build": "DROPBOX_ACCESS_TOKEN=$(./get-dbx-at.sh) && gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "dbx:rt": "npx http-server . -o dropbox-auth.html"
   },
   "dependencies": {
     "gatsby": "^4.25.9",
