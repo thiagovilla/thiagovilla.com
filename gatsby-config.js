@@ -63,5 +63,16 @@ module.exports = {
       },
     },
     "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-source-graphcms",
+      options: {
+        endpoint: process.env.GRAPHCMS_ENDPOINT,
+        queryConcurrency: +process.env.GRAPHCMS_QUERY_CONCURRENCY ?? 10,
+        stages:
+          process.env.DRAFT_ENV === "true"
+            ? ["PUBLISHED", "DRAFT"]
+            : ["PUBLISHED"],
+      },
+    },
   ],
 };
