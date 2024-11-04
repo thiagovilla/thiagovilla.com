@@ -2,6 +2,3 @@ node_modules/
 .cache/
 public
 .env
-content/
-src/pages/**/*.mdx
-graphcms-fragments/

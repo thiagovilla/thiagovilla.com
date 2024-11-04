@@ -1,1 +1,1 @@
-export { wrapPageElement, wrapRootElement } from "./gatsby-shared";
+export { wrapPageElement } from "./gatsby-shared";

@@ -2,8 +2,6 @@
 image: node:lts
 # Functions that should be executed before the build script is run
 before_script:
-  - apt-get -qq update
-  - apt-get install -y jq
   - npm install
 pages:
   script:
