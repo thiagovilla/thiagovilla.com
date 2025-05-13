@@ -1,6 +1,7 @@
 cache:
   paths:
     - .cache
+    - node_modules
     - public
 
 stages:
@@ -12,24 +13,25 @@ build:
   image: node:18
   before_script:
     - npm install
-    # - export BUILD_TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
-    # - sed -i "s/REPLACE_ME/${BUILD_TIMESTAMP}/g" src/components/BuildTimestamp.js
   script:
     - npm run build
   artifacts:
     paths:
       - public
     expire_in: 1 day
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
 
-deploy:
+pages:  # Must be named 'pages' for GitLab Pages
   stage: deploy
   image: alpine
   script:
-    - echo "Deploying to production..."
-    # The public directory is already in the correct location
+    - echo "Deploying to GitLab Pages..."
   artifacts:
     paths:
-      - public
-  only:
-    - main
-    - schedules
+      - public  # Must include the public directory
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  environment:
+    name: production
+    url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME
