@@ -1,6 +1,6 @@
 {
   "name": "thiago-villa",
-  "version": "1.0.0",
+  "version": "talc.2",
   "private": true,
   "description": "thiago-villa",
   "keywords": [
@@ -8,15 +8,20 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "gatsby develop",
     "build": "gatsby build",
+    "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "dropbox:oauth2": "npx http-server ./scripts -o dropbox-oauth2-start.html",
+    "dropbox:develop": ". ./scripts/get-dropbox-access-token.sh && gatsby develop",
+    "dropbox:build": ". ./scripts/get-dropbox-access-token.sh && gatsby build"
   },
   "dependencies": {
     "gatsby": "^4.25.9",
     "gatsby-plugin-image": "^2.25.0",
+    "gatsby-source-dropbox": "^0.2.3",
     "gatsby-source-filesystem": "^4.25.0",
+    "gatsby-transformer-remark": "^5.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

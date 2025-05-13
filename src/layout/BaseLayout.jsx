@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./styles.css";
+import "../styles.css";
 
 function PromoBar() {
   return (
@@ -33,8 +33,8 @@ function Header() {
             </a>
           </li>
           <li className="pure-menu-item">
-            <a href="#contact" className="pure-menu-link">
-              Contact
+            <a href="#contact" className="pure-menu-link pure-button pure-button-primary">
+              Work With Me
             </a>
           </li>
         </ul>

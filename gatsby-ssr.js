@@ -1,1 +1,1 @@
-export { wrapPageElement, onRenderBody } from "./gatsby-shared";
+export { onRenderBody } from "./gatsby-shared";

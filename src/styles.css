@@ -1,7 +1,23 @@
+/* Import font styles */
+@import './styles/fonts.css';
+
+:root {
+  --navy-blue: #1F3040;
+  --royal-blue: #5E82B8;
+  --orange: #E57D33;
+  --text-dark: #2A3543;
+  --text-medium: #555B64;
+  --text-light: #7A8191;
+  --background-light: #F5F7FA;
+  --background-medium: #E8ECF2;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /*
@@ -10,8 +26,11 @@
 */
 body {
   line-height: 1.7em;
-  color: #7f8c8d;
-  font-size: 13px;
+  color: var(--text-medium);
+  font-size: 16px;
+  font-family: 'Galano Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  background-color: var(--background-light);
 }
 
 h1,
@@ -21,7 +40,59 @@ h4,
 h5,
 h6,
 label {
-  color: #34495e;
+  color: var(--navy-blue);
+  font-family: 'Galano Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+a {
+  color: var(--royal-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--orange);
+}
+
+strong, b {
+  font-weight: 600;
 }
 
 .pure-img-responsive {
@@ -51,19 +122,710 @@ label {
 * I want my pure-button elements to look a little different
 */
 .pure-button {
-  background-color: #1f8dd6;
+  background-color: var(--royal-blue);
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
+  font-family: 'Galano Grotesque', sans-serif;
 }
 
 a.pure-button-primary {
   background: white;
-  color: #1f8dd6;
+  color: var(--royal-blue);
   border-radius: 5px;
   font-size: 120%;
 }
+/* Hero section styles */
+.splash-head {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--navy-blue);
+}
 
+.splash-subhead {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: var(--text-medium);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pure-button-primary {
+  background-color: var(--royal-blue);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pure-button-primary:hover {
+  background-color: #4b71ab;
+  transform: translateY(-2px);
+}
+
+.pure-button-secondary {
+  background-color: #fff;
+  color: var(--royal-blue);
+  border: 1px solid var(--royal-blue);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pure-button-secondary:hover {
+  background-color: rgba(94, 130, 184, 0.1);
+  transform: translateY(-2px);
+}
+
+.testimonial {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.testimonial blockquote {
+  margin: 0;
+  font-style: italic;
+  position: relative;
+}
+
+.testimonial cite {
+  display: block;
+  text-align: right;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.tech-stack, .client-logos {
+  margin: 2rem 0;
+}
+
+.tech-stack h3, .client-logos h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.logo-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.tech-logo, .client-logo {
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.more-icon {
+  cursor: pointer;
+}
+
+/* Benefits Section Styles */
+.benefits-section {
+  margin: 3rem 0;
+}
+
+.benefit-item {
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.benefit-title {
+  color: var(--royal-blue);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.benefit-description {
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+/* Services Section Styles */
+.services-section {
+  padding: 4rem 0;
+  background-color: var(--background-light);
+}
+
+.services-subhead {
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto 3rem;
+  font-size: 1.2rem;
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+.services-list {
+  max-width: 90%;
+  margin: 0 auto 3rem;
+}
+
+.service-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 3px solid var(--royal-blue);
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  border-left-color: var(--orange);
+}
+
+.service-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--navy-blue);
+  display: flex;
+  align-items: center;
+}
+
+.service-title::before {
+  content: "→";
+  margin-right: 0.75rem;
+  color: var(--orange);
+}
+
+.service-description {
+  line-height: 1.6;
+  color: #555;
+  margin-left: 1.5rem;
+}
+
+.cta-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.cta-container .pure-button-primary {
+  background-color: #1f8dd6;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-container .pure-button-primary:hover {
+  background-color: #166eb8;
+  transform: translateY(-2px);
+}
+
+/* Features Section Styles */
+.features-section {
+  padding: 4rem 0;
+  background-color: #f8f8f8;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #1f8dd6;
+  opacity: 0.7;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.feature-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-item {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Sturdy Software Section Styles */
+.sturdy-software-section {
+  padding: 5rem 0;
+  background-color: #1f3a52;
+  color: #ffffff;
+  position: relative;
+}
+
+.sturdy-software-section .content-head {
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+}
+
+.sturdy-software-section .content-head::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background-color: #1f8dd6;
+}
+
+.sturdy-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sturdy-intro {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  text-align: center;
+  border-left: 4px solid #1f8dd6;
+  padding-left: 1.5rem;
+  margin-left: -1.5rem;
+}
+
+.sturdy-paragraphs {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.sturdy-paragraphs p {
+  margin-bottom: 1.5rem;
+}
+
+.sturdy-conclusion {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  text-align: center;
+  color: #1f8dd6;
+}
+
+@media (max-width: 768px) {
+  .sturdy-intro {
+    font-size: 1.2rem;
+    margin-left: 0;
+    padding-left: 1rem;
+  }
+  
+  .sturdy-paragraphs {
+    font-size: 1rem;
+  }
+  
+  .sturdy-conclusion {
+    font-size: 1.1rem;
+  }
+}
+  
+  /* Why I Work in Tech Section Styles */
+  .why-tech-section {
+  padding: 4rem 0;
+  background-color: #f9f9f9;
+  background-image: linear-gradient(135deg, #ffffff 25%, #f5f5f5 25%, #f5f5f5 50%, #ffffff 50%, #ffffff 75%, #f5f5f5 75%, #f5f5f5 100%);
+  background-size: 40px 40px;
+  }
+  
+  .why-tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  }
+  
+  .why-tech-item {
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  }
+  
+  .why-tech-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #1f8dd6;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  }
+  
+  .why-tech-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .why-tech-item:hover::after {
+  transform: scaleX(1);
+  }
+  
+  .why-tech-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #333;
+  }
+  
+  .why-tech-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+  }
+  
+  @media (max-width: 768px) {
+  .why-tech-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .why-tech-item {
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  }
+  
+  /* Contact Section Styles */
+  .contact-section {
+  padding: 5rem 0;
+  background-color: #f0f7ff;
+  position: relative;
+  }
+  
+  .contact-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #1f8dd6 0%, #6ab0eb 100%);
+  }
+  
+  .contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+  
+  .contact-info {
+  flex: 1;
+  min-width: 250px;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .contact-item {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  }
+  
+  .contact-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+  color: #444;
+  }
+  
+  .contact-item a {
+  color: #1f8dd6;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+  }
+  
+  .contact-item a:hover {
+  color: #166eb8;
+  }
+  
+  .contact-item a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #1f8dd6;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+  }
+  
+  .contact-item a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  }
+  
+  .email-link {
+  cursor: pointer;
+  }
+  
+  .contact-form-container {
+  flex: 2;
+  min-width: 300px;
+  }
+  
+  .contact-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-group {
+  margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #444;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+  border-color: #1f8dd6;
+  box-shadow: 0 0 0 3px rgba(31, 141, 214, 0.2);
+  outline: none;
+  }
+  
+  .contact-form .pure-button-primary {
+  background-color: #1f8dd6;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .contact-form .pure-button-primary:hover {
+  background-color: #166eb8;
+  transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+  
+  .contact-info,
+  .contact-form-container {
+    width: 100%;
+  }
+  }
+
+.content-head {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 2rem 0;
+  text-align: center;
+  color: #333;
+  position: relative;
+}
+
+.content-head:after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #1f8dd6;
+  margin: 0.8rem auto 0;
+}
+
+@media (min-width: 768px) {
+  .splash-head {
+    font-size: 3rem;
+  }
+  
+  .splash-subhead {
+    font-size: 1.4rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .benefit-item {
+    padding: 2rem;
+  }
+}
+  
+  /* Projects Section Styles */
+  .projects-section {
+  background-color: #f8f9fa;
+  padding: 3rem 0;
+  }
+  
+  .projects-subhead {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
+  color: #555;
+  }
+  
+  .project-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin: 1rem;
+  height: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  }
+  
+  .project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .project-logo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  
+  .logo-placeholder {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1f8dd6;
+  }
+  
+  .project-description {
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  }
+  
+  .project-skills h4, .project-stack h4 {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 1rem;
+  }
+  
+  .project-skills p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  }
+  
+  .stack-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  }
+  
+  .stack-item {
+  background-color: #f0f5f9;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #1f8dd6;
+  }
+  
+  .cta-container {
+  text-align: center;
+  margin-top: 3rem;
+  }
+  
+  @media (max-width: 767px) {
+  .project-card {
+    margin-bottom: 2rem;
+  }
+  }
 /*
 * -- MENU STYLES --
 * I want to customize how my .pure-menu looks at the top of the page
@@ -75,7 +837,7 @@ a.pure-button-primary {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .home-menu {
-  background: #2d3e50;
+  background: var(--navy-blue);
 }
 .pure-menu.pure-menu-fixed {
   /* Fixed menus normally have a border at the bottom. */
@@ -86,22 +848,25 @@ a.pure-button-primary {
 
 .home-menu .pure-menu-heading {
   color: white;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 120%;
+  font-family: 'Galano Grotesque', sans-serif;
 }
 
+/* Fix contrast for active link */
 .home-menu .pure-menu-selected a {
-  color: white;
+  color: white !important; /* Improving contrast from black on navy blue */
 }
 
 .home-menu a {
-  color: #6fbef3;
+  color: var(--royal-blue);
+  font-family: 'Galano Grotesque', sans-serif;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
   background: none;
   border: none;
-  color: #aecfe5;
+  color: var(--orange);
 }
 
 /*
@@ -129,7 +894,29 @@ a.pure-button-primary {
     border: none;
   }
 }
+/* Avatar placeholder styles */
+.testimonial {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
+.avatar-placeholder {
+  flex-shrink: 0;
+}
+
+.avatar-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #555;
+  font-size: 1.2rem;
+}
 /*
 * -- DESKTOP (AND UP) MEDIA QUERIES --
 * On desktops and other large devices, we want to over-ride some
@@ -153,12 +940,31 @@ a.pure-button-primary {
   }
 }
 
+/* Text selection styling */
+::selection {
+  background-color: rgba(94, 130, 184, 0.3);
+  color: var(--navy-blue);
+}
+
 /* PROMO BAR */
 .promo-bar {
   padding: 12px 32px;
-  background-color: palegoldenrod;
+  background-color: var(--orange);
   text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
+
+.promo-bar a {
+  color: white;
+  text-decoration: underline;
+}
+
+.promo-bar a:hover {
+  color: var(--navy-blue);
+}
+
 .home-menu {
   top: 46px;
 }
