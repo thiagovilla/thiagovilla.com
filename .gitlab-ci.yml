@@ -31,5 +31,5 @@ deploy:
     paths:
       - public
   only:
-    - release
+    - main
     - schedules
