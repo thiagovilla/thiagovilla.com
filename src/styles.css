@@ -1,15 +1,15 @@
 /* Import font styles */
-@import './styles/fonts.css';
+@import "./styles/fonts.css";
 
 :root {
-  --navy-blue: #1F3040;
-  --royal-blue: #5E82B8;
-  --orange: #E57D33;
-  --text-dark: #2A3543;
-  --text-medium: #555B64;
-  --text-light: #7A8191;
-  --background-light: #F5F7FA;
-  --background-medium: #E8ECF2;
+  --color-navy-blue: #1f3040;
+  --color-royal-blue: #5e82b8;
+  --color-orange: #e57d33;
+  --text-dark: #2a3543;
+  --text-medium: #555b64;
+  --text-light: #7a8191;
+  --background-light: #f5f7fa;
+  --background-medium: #e8ecf2;
 }
 
 * {
@@ -28,7 +28,8 @@ body {
   line-height: 1.7em;
   color: var(--text-medium);
   font-size: 16px;
-  font-family: 'Galano Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Galano Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
   background-color: var(--background-light);
 }
@@ -40,8 +41,7 @@ h4,
 h5,
 h6,
 label {
-  color: var(--navy-blue);
-  font-family: 'Galano Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-navy-blue);
   margin-top: 1.5em;
   margin-bottom: 0.75em;
   line-height: 1.3;
@@ -82,16 +82,17 @@ p {
 }
 
 a {
-  color: var(--royal-blue);
+  color: var(--color-royal-blue);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--orange);
+  color: var(--color-orange);
 }
 
-strong, b {
+strong,
+b {
   font-weight: 600;
 }
 
@@ -122,18 +123,16 @@ strong, b {
 * I want my pure-button elements to look a little different
 */
 .pure-button {
-  background-color: var(--royal-blue);
+  background-color: var(--color-royal-blue);
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
-  font-family: 'Galano Grotesque', sans-serif;
 }
 
 a.pure-button-primary {
   background: white;
-  color: var(--royal-blue);
+  color: var(--color-royal-blue);
   border-radius: 5px;
-  font-size: 120%;
 }
 /* Hero section styles */
 .splash-head {
@@ -141,7 +140,7 @@ a.pure-button-primary {
   font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 1rem;
-  color: var(--navy-blue);
+  color: var(--color-navy-blue);
 }
 
 .splash-subhead {
@@ -160,8 +159,8 @@ a.pure-button-primary {
 }
 
 .pure-button-primary {
-  background-color: var(--royal-blue);
-  color: white;
+  background-color: var(--color-royal-blue) !important;
+  color: white !important;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   text-decoration: none;
@@ -170,14 +169,13 @@ a.pure-button-primary {
 }
 
 .pure-button-primary:hover {
-  background-color: #4b71ab;
   transform: translateY(-2px);
 }
 
 .pure-button-secondary {
   background-color: #fff;
-  color: var(--royal-blue);
-  border: 1px solid var(--royal-blue);
+  color: var(--color-royal-blue);
+  border: 1px solid var(--color-royal-blue);
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   text-decoration: none;
@@ -210,11 +208,13 @@ a.pure-button-primary {
   font-weight: 600;
 }
 
-.tech-stack, .client-logos {
+.tech-stack,
+.client-logos {
   margin: 2rem 0;
 }
 
-.tech-stack h3, .client-logos h3 {
+.tech-stack h3,
+.client-logos h3 {
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.2rem;
@@ -228,7 +228,8 @@ a.pure-button-primary {
   align-items: center;
 }
 
-.tech-logo, .client-logo {
+.tech-logo,
+.client-logo {
   padding: 0.5rem 1rem;
   background-color: #f8f9fa;
   border-radius: 4px;
@@ -255,7 +256,7 @@ a.pure-button-primary {
 }
 
 .benefit-title {
-  color: var(--royal-blue);
+  color: var(--color-royal-blue);
   margin-bottom: 1rem;
   font-size: 1.3rem;
   font-weight: 600;
@@ -293,20 +294,20 @@ a.pure-button-primary {
   padding: 1.5rem 2rem;
   margin-bottom: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-left: 3px solid var(--royal-blue);
+  border-left: 3px solid var(--color-royal-blue);
 }
 
 .service-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-  border-left-color: var(--orange);
+  border-left-color: var(--color-orange);
 }
 
 .service-title {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
-  color: var(--navy-blue);
+  color: var(--color-navy-blue);
   display: flex;
   align-items: center;
 }
@@ -314,7 +315,7 @@ a.pure-button-primary {
 .service-title::before {
   content: "→";
   margin-right: 0.75rem;
-  color: var(--orange);
+  color: var(--color-orange);
 }
 
 .service-description {
@@ -399,7 +400,7 @@ a.pure-button-primary {
   .features-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .feature-item {
     margin-bottom: 1rem;
   }
@@ -416,14 +417,13 @@ a.pure-button-primary {
 .sturdy-software-section .content-head {
   color: #ffffff;
   position: relative;
-  display: inline-block;
 }
 
 .sturdy-software-section .content-head::after {
   content: "";
   position: absolute;
   bottom: -10px;
-  left: 0;
+  inset-inline: 0;
   width: 80px;
   height: 3px;
   background-color: #1f8dd6;
@@ -468,33 +468,42 @@ a.pure-button-primary {
     margin-left: 0;
     padding-left: 1rem;
   }
-  
+
   .sturdy-paragraphs {
     font-size: 1rem;
   }
-  
+
   .sturdy-conclusion {
     font-size: 1.1rem;
   }
 }
-  
-  /* Why I Work in Tech Section Styles */
-  .why-tech-section {
+
+/* Why I Work in Tech Section Styles */
+.why-tech-section {
   padding: 4rem 0;
   background-color: #f9f9f9;
-  background-image: linear-gradient(135deg, #ffffff 25%, #f5f5f5 25%, #f5f5f5 50%, #ffffff 50%, #ffffff 75%, #f5f5f5 75%, #f5f5f5 100%);
+  background-image: linear-gradient(
+    135deg,
+    #ffffff 25%,
+    #f5f5f5 25%,
+    #f5f5f5 50%,
+    #ffffff 50%,
+    #ffffff 75%,
+    #f5f5f5 75%,
+    #f5f5f5 100%
+  );
   background-size: 40px 40px;
-  }
-  
-  .why-tech-grid {
+}
+
+.why-tech-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
   margin-top: 3rem;
-  }
-  
-  .why-tech-item {
+}
+
+.why-tech-item {
   flex: 1;
   min-width: 300px;
   max-width: 350px;
@@ -506,9 +515,9 @@ a.pure-button-primary {
   text-align: center;
   position: relative;
   overflow: hidden;
-  }
-  
-  .why-tech-item::after {
+}
+
+.why-tech-item::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -519,50 +528,50 @@ a.pure-button-primary {
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
-  }
-  
-  .why-tech-item:hover {
+}
+
+.why-tech-item:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  }
-  
-  .why-tech-item:hover::after {
+}
+
+.why-tech-item:hover::after {
   transform: scaleX(1);
-  }
-  
-  .why-tech-title {
+}
+
+.why-tech-title {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1.2rem;
   color: #333;
-  }
-  
-  .why-tech-description {
+}
+
+.why-tech-description {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #555;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
   .why-tech-grid {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .why-tech-item {
     max-width: 100%;
     margin-bottom: 1.5rem;
   }
-  }
-  
-  /* Contact Section Styles */
-  .contact-section {
+}
+
+/* Contact Section Styles */
+.contact-section {
   padding: 5rem 0;
   background-color: #f0f7ff;
   position: relative;
-  }
-  
-  .contact-section::before {
+}
+
+.contact-section::before {
   content: "";
   position: absolute;
   top: 0;
@@ -570,9 +579,9 @@ a.pure-button-primary {
   right: 0;
   height: 5px;
   background: linear-gradient(90deg, #1f8dd6 0%, #6ab0eb 100%);
-  }
-  
-  .contact-container {
+}
+
+.contact-container {
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
@@ -581,41 +590,41 @@ a.pure-button-primary {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  }
-  
-  .contact-info {
+}
+
+.contact-info {
   flex: 1;
   min-width: 250px;
   padding: 1.5rem;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .contact-item {
+}
+
+.contact-item {
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
-  }
-  
-  .contact-label {
+}
+
+.contact-label {
   font-weight: 600;
   margin-right: 0.5rem;
   color: #444;
-  }
-  
-  .contact-item a {
+}
+
+.contact-item a {
   color: #1f8dd6;
   text-decoration: none;
   position: relative;
   transition: color 0.3s ease;
-  }
-  
-  .contact-item a:hover {
+}
+
+.contact-item a:hover {
   color: #166eb8;
-  }
-  
-  .contact-item a::after {
-  content: '';
+}
+
+.contact-item a::after {
+  content: "";
   position: absolute;
   width: 100%;
   height: 1px;
@@ -625,58 +634,58 @@ a.pure-button-primary {
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease;
-  }
-  
-  .contact-item a:hover::after {
+}
+
+.contact-item a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
-  }
-  
-  .email-link {
+}
+
+.email-link {
   cursor: pointer;
-  }
-  
-  .contact-form-container {
+}
+
+.contact-form-container {
   flex: 2;
   min-width: 300px;
-  }
-  
-  .contact-form {
+}
+
+.contact-form {
   background-color: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .form-group {
+}
+
+.form-group {
   margin-bottom: 1.5rem;
-  }
-  
-  .form-group label {
+}
+
+.form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #444;
-  }
-  
-  .form-group input,
-  .form-group textarea {
+}
+
+.form-group input,
+.form-group textarea {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
   border-color: #1f8dd6;
   box-shadow: 0 0 0 3px rgba(31, 141, 214, 0.2);
   outline: none;
-  }
-  
-  .contact-form .pure-button-primary {
+}
+
+.contact-form .pure-button-primary {
   background-color: #1f8dd6;
   color: white;
   padding: 0.8rem 1.5rem;
@@ -685,23 +694,23 @@ a.pure-button-primary {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .contact-form .pure-button-primary:hover {
+}
+
+.contact-form .pure-button-primary:hover {
   background-color: #166eb8;
   transform: translateY(-2px);
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
   .contact-container {
     flex-direction: column;
   }
-  
+
   .contact-info,
   .contact-form-container {
     width: 100%;
   }
-  }
+}
 
 .content-head {
   font-weight: 700;
@@ -726,33 +735,33 @@ a.pure-button-primary {
   .splash-head {
     font-size: 3rem;
   }
-  
+
   .splash-subhead {
     font-size: 1.4rem;
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .benefit-item {
     padding: 2rem;
   }
 }
-  
-  /* Projects Section Styles */
-  .projects-section {
+
+/* Projects Section Styles */
+.projects-section {
   background-color: #f8f9fa;
   padding: 3rem 0;
-  }
-  
-  .projects-subhead {
+}
+
+.projects-subhead {
   text-align: center;
   margin-bottom: 3rem;
   font-size: 1.2rem;
   color: #555;
-  }
-  
-  .project-card {
+}
+
+.project-card {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -762,70 +771,71 @@ a.pure-button-primary {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
-  }
-  
-  .project-card:hover {
+}
+
+.project-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-  }
-  
-  .project-logo {
+}
+
+.project-logo {
   text-align: center;
   margin-bottom: 1.5rem;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  }
-  
-  .logo-placeholder {
+}
+
+.logo-placeholder {
   font-weight: bold;
   font-size: 1.5rem;
   color: #1f8dd6;
-  }
-  
-  .project-description {
+}
+
+.project-description {
   flex-grow: 1;
   margin-bottom: 1.5rem;
   line-height: 1.6;
-  }
-  
-  .project-skills h4, .project-stack h4 {
+}
+
+.project-skills h4,
+.project-stack h4 {
   margin-bottom: 0.5rem;
   color: #333;
   font-size: 1rem;
-  }
-  
-  .project-skills p {
+}
+
+.project-skills p {
   font-size: 0.9rem;
   color: #555;
   margin-bottom: 1.5rem;
-  }
-  
-  .stack-logos {
+}
+
+.stack-logos {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  }
-  
-  .stack-item {
+}
+
+.stack-item {
   background-color: #f0f5f9;
   padding: 0.3rem 0.7rem;
   border-radius: 4px;
   font-size: 0.8rem;
   color: #1f8dd6;
-  }
-  
-  .cta-container {
+}
+
+.cta-container {
   text-align: center;
   margin-top: 3rem;
-  }
-  
-  @media (max-width: 767px) {
+}
+
+@media (max-width: 767px) {
   .project-card {
     margin-bottom: 2rem;
   }
-  }
+}
 /*
 * -- MENU STYLES --
 * I want to customize how my .pure-menu looks at the top of the page
@@ -837,7 +847,7 @@ a.pure-button-primary {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .home-menu {
-  background: var(--navy-blue);
+  background: var(--color-navy-blue);
 }
 .pure-menu.pure-menu-fixed {
   /* Fixed menus normally have a border at the bottom. */
@@ -850,7 +860,6 @@ a.pure-button-primary {
   color: white;
   font-weight: 600;
   font-size: 120%;
-  font-family: 'Galano Grotesque', sans-serif;
 }
 
 /* Fix contrast for active link */
@@ -859,14 +868,13 @@ a.pure-button-primary {
 }
 
 .home-menu a {
-  color: var(--royal-blue);
-  font-family: 'Galano Grotesque', sans-serif;
+  color: var(--color-royal-blue);
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
   background: none;
   border: none;
-  color: var(--orange);
+  color: var(--color-orange);
 }
 
 /*
@@ -943,13 +951,13 @@ a.pure-button-primary {
 /* Text selection styling */
 ::selection {
   background-color: rgba(94, 130, 184, 0.3);
-  color: var(--navy-blue);
+  color: var(--color-navy-blue);
 }
 
 /* PROMO BAR */
 .promo-bar {
   padding: 12px 32px;
-  background-color: var(--orange);
+  background-color: var(--color-orange);
   text-align: center;
   color: white;
   font-weight: 600;
@@ -962,7 +970,7 @@ a.pure-button-primary {
 }
 
 .promo-bar a:hover {
-  color: var(--navy-blue);
+  color: var(--color-navy-blue);
 }
 
 .home-menu {

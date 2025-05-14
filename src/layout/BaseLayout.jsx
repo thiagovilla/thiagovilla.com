@@ -33,7 +33,7 @@ function Header() {
             </a>
           </li>
           <li className="pure-menu-item">
-            <a href="#contact" className="pure-menu-link pure-button pure-button-primary">
+            <a href="#contact" className="pure-menu-link">
               Work With Me
             </a>
           </li>
