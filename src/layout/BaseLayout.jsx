@@ -4,8 +4,8 @@ import "../styles.css";
 
 function PromoBar() {
   return (
-    <section className="promo-bar">
-      I'm available for hiring. <a href="#contact">Hire now</a>.
+    <section id="promo-bar">
+      <a href="#contact">I'm available for hiring. Hire now.</a>
     </section>
   );
 }

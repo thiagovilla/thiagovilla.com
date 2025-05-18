@@ -5,7 +5,7 @@ import "../styles.css";
 function MainLayout(props) {
   return (
     <BaseLayout>
-      <div className="wrapper">{props.children}</div>
+      <div className="container">{props.children}</div>
     </BaseLayout>
   );
 }
