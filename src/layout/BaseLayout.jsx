@@ -13,7 +13,7 @@ function PromoBar() {
 function Header() {
   return (
     <div className="header">
-      <div className="home-menu pure-menu pure-menu-horizontal">
+      <nav className="home-menu pure-menu pure-menu-horizontal">
         <a className="pure-menu-heading" href="/">
           Thiago Villa
         </a>
@@ -38,7 +38,7 @@ function Header() {
             </a>
           </li>
         </ul>
-      </div>
+      </nav>
     </div>
   );
 }
@@ -65,6 +65,7 @@ function Layout(props) {
       <Header />
       {props.children}
       <Footer />
+      <div id="toast-portal" />
     </>
   );
 }

@@ -87,3 +87,13 @@ The `/` slug ony renders to index _if_ there is no `index.js` file.
 # Transformer Plugins
 
 **gatsby-transformer-remark:** parses markdown into HTML. Required by: Google Docs. Version 6 requires Gatsby 5. Use version 5 with Gatsby 4.
+
+# Plugin Upgrades Needed
+
+As of 05/19/25 (Talc V3 - blog), using older versions due to Gatsby 4 compatibility. Required for MD files and blog images. Update when
+moving to Gatsby 5:
+
+`gatsby-transformer-remark`: 5 -> 7
+`gatsby-remark-images`: 6 -> 7
+`gatsby-plugin-sharp`: 4 -> 6
+`gatsby-transformer-sharp`: 4 -> 5

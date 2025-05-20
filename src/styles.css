@@ -16,14 +16,6 @@
     --text-light: #7a8191;
     --background-light: #f5f7fa;
     --background-medium: #e8ecf2;
-    --space-xs: 8px;
-    --space-sm: 12px;
-    --space-md: 16px;
-    --space-lg: 24px;
-    --space-xl: 32px;
-    --space-2xl: 48px;
-    --space-3xl: 96px;
-
 
     /* Base font size */
     --font-size-base: 1rem; /* 16px */
@@ -42,6 +34,14 @@
     --font-weight-regular: 400;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+
+    --space-xs: .5rem;  /* 8px  */
+    --space-sm: .75rem; /* 12px */
+    --space-md: 1rem;   /* 16px */
+    --space-lg: 1.5rem; /* 24px */
+    --space-xl: 2rem;   /* 32px */
+    --space-2xl: 3rem;  /* 48px */
+    --space-3xl: 6rem;  /* 96px */
 }
 
 @media (min-width: 78em) {
@@ -90,6 +90,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+::selection {
+    background-color: rgba(94, 130, 184, 0.3);
+    color: var(--color-primary);
+}
+
 body {
     font-family: "Galano Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-medium);
@@ -105,9 +110,6 @@ h5,
 h6,
 label {
     color: var(--color-primary);
-    margin-top: 1.5em;
-    margin-bottom: 0.75em;
-    line-height: 1.3;
 }
 
 a {
@@ -141,7 +143,7 @@ b {
     padding: 0 var(--space-xl);
 }
 
-@media (min-width: 78em) {
+@media (min-width: 48em) {
     .container {
         max-width: 1120px;
         margin: 0 auto;
@@ -232,7 +234,7 @@ b {
 }
 
 /* Body small */
-#hero blockquote, #hero div li {
+#hero blockquote, #hero div li, #post header {
     font-size: var(--font-size-body-small);
     font-weight: var(--font-weight-regular);
     line-height: 1.4;
@@ -245,7 +247,7 @@ body {
 }
 
 /* Body large */
-.text-body-large, #hero p, #projects > p {
+.text-body-large, #hero p, #projects > p, #post main p:first-of-type, #post h4, #bio p:first-of-type, #related h3 {
     font-size: var(--font-size-body-large);
     line-height: 1.5;
     font-weight: 400;
@@ -253,7 +255,7 @@ body {
 }
 
 /* H3 */
-.text-h3, #hero h2, #benefits h3, #projects h3 {
+.text-h3, #hero h2, #benefits h3, #projects h3, #post h3, #bio h2, #related h2 {
     font-size: var(--font-size-h3);
     font-weight: var(--font-weight-semibold);
     line-height: 1.4;
@@ -261,7 +263,7 @@ body {
 }
 
 /* H2 */
-.text-h2, #benefits h2, #projects h2, #services h2, #features h2, #sturdy-software h2, #why-tech h2 {
+.text-h2, #benefits h2, #projects h2, #services h2, #features h2, #sturdy-software h2, #why-tech h2, #post h2 {
     font-size: var(--font-size-h2);
     font-weight: var(--font-weight-semibold);
     line-height: 1.3;
@@ -269,7 +271,7 @@ body {
 }
 
 /* H1 */
-.text-h1, #hero h1 {
+.text-h1, #hero h1, #post h1 {
     font-size: var(--font-size-h1);
     font-weight: var(--font-weight-bold);
     line-height: 1.2;
@@ -288,6 +290,8 @@ body {
 
 /* SHARED STYLES */
 
+/* Homepage H2s */
+
 #benefits h2, #projects h2, #services h2, #features h2, #sturdy-software h2, #why-tech h2 {
     text-transform: uppercase;
     margin: 0 0 var(--space-2xl) 0;
@@ -304,9 +308,24 @@ body {
     margin: var(--space-sm) auto 0;
 }
 
-/* HOME PAGE */
+/* Tag list */
+
+#projects > ul > li > ul:last-of-type, #post header ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+#projects > ul > li > ul:last-of-type li, #post header ul:first-of-type li {
+    background-color: #f0f5f9;
+    padding: 0.3rem 0.7rem;
+    color: var(--color-secondary);
+}
+
+/* LAYOUT */
 
 /* PROMO BAR */
+
 #promo-bar {
     background-color: var(--color-accent);
     color: white;
@@ -320,6 +339,28 @@ body {
     text-align: center;
     color: white;
 }
+
+/* HEADER */
+
+.header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* FOOTER */
+
+footer {
+    background: #111;
+    padding: 12px 32px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* HOME PAGE */
 
 /* HERO SECTION */
 
@@ -565,18 +606,6 @@ body {
 #projects > ul > li > ul:first-of-type li:last-child:after {
     content: "";
     margin-right: 0;
-}
-
-#projects > ul > li > ul:last-of-type {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-}
-
-#projects > ul > li > ul:last-of-type li {
-    background-color: #f0f5f9;
-    padding: 0.3rem 0.7rem;
-    color: var(--color-secondary);
 }
 
 #projects a {
@@ -964,121 +993,152 @@ body {
     }
 }
 
-.content-head {
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 2rem 0;
-    text-align: center;
-    color: #333;
-    position: relative;
+/* BLOG POST */
+
+#post {
+    max-width: 700px;
+    margin: 0 auto var(--space-3xl) auto;
+    padding-top: var(--space-xl);
 }
 
-.content-head:after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 3px;
-    background: #1f8dd6;
-    margin: 0.8rem auto 0;
-}
+#post h1 { margin: 0 0 var(--space-lg) 0; }
 
-@media (min-width: 768px) {
-    .splash-head {
-        font-size: 3rem;
-    }
-
-    .splash-subhead {
-        font-size: 1.4rem;
-        max-width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .benefit-item {
-        padding: 2rem;
-    }
-}
-
-
-/*
-* -- MENU STYLES --
-* Additional menu styles for responsive design
-*/
-
-/*
-* -- TABLET (AND UP) MEDIA QUERIES --
-* On tablets and other medium-sized devices, we want to customize some
-* of the mobile styles.
-*/
-@media (min-width: 48em) {
-    /* We increase the body font size */
-    body {
-        font-size: 16px;
-    }
-
-    /* We can align the menu header to the left, but float the
-    menu items to the right. */
-    .home-menu {
-        text-align: left;
-    }
-
-    .home-menu ul {
-        float: right;
-    }
-
-    /* We remove the border-separator assigned to .l-box-lrg */
-    .l-box-lrg {
-        border: none;
-    }
-}
-
-/* Avatar placeholder styles */
-.testimonial {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.avatar-placeholder {
-    flex-shrink: 0;
-}
-
-.avatar-circle {
-    width: 60px;
-    height: 60px;
+/* avatar */
+#post header > .gatsby-image-wrapper {
     border-radius: 50%;
-    background-color: #e0e0e0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: #555;
-    font-size: 1.2rem;
+    margin-right: var(--space-sm);
+    float: left;
 }
 
-/*
-* -- DESKTOP (AND UP) MEDIA QUERIES --
-* On desktops and other large devices, we want to over-ride some
-* of the mobile and tablet styles.
-*/
-@media (min-width: 78em) {
+/* metadata */
+#post header p { margin: 0 0 calc(var(--space-xs) / 2) 0; }
+
+/* date */
+#post header p > button {
+    border: 0;
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    text-decoration: dashed underline var(--color-secondary);
+    text-underline-offset: calc(var(--space-xs) / 2);
+    cursor: pointer;
 }
 
-
-/* Text selection styling */
-::selection {
-    background-color: rgba(94, 130, 184, 0.3);
-    color: var(--color-primary);
+/* author */
+#post header address {
+    display: inline;
+    font-style: normal;
 }
 
-/* FOOTER */
-footer {
-    background: #111;
-    padding: 12px 32px;
-    text-align: center;
+/* category */
+#post header strong {
+    display: inline-block;
+    margin-top: var(--space-xs); /* same as metadata */
+    padding: calc(var(--space-xs) / 4) var(--space-xs);
+    color: white;
+    background-color: var(--color-secondary);
+    font-weight: var(--font-weight-regular);
 }
 
-footer p {
+@media (min-width: 48rem) {
+    #post header strong {
+        margin: 0 0 0 var(--space-sm);
+    }
+}
+
+#post header ul {
+    margin: 0 0 var(--space-lg) 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+/* socials */
+#post header ul:last-of-type { gap: var(--space-sm); }
+
+#post header ul:last-of-type button {
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--color-secondary);
+}
+
+#post header ul:last-of-type button:hover {
+    color: var(--color-accent);
+}
+
+/* featured image */
+#post header figure, #related figure { margin: 0; }
+
+/* AUTHOR BIO */
+
+#bio {
+    background-color: white;
+    padding: var(--space-lg);
+    margin: 0 0 var(--space-lg) 0;
+}
+
+@media (min-width: 48rem) {
+    #bio {
+        max-width: 700px;
+        margin: 0 auto var(--space-xl) auto;
+        top: 50%;
+    }
+}
+
+#bio .gatsby-image-wrapper { margin: 0 auto; }
+
+#bio ul {
     margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    gap: var(--space-sm);
 }
+
+@media (min-width: 48rem) {
+    #bio .gatsby-image-wrapper { float: left; }
+
+    #bio h2 { margin-top: 0; }
+
+    #bio h2, #bio p, #bio ul { margin-left: calc(100px + var(--space-lg)); }
+}
+
+/* RELATED POSTS */
+
+#related { border-top: 1px solid var(--color-secondary); }
+
+@media (min-width: 48rem) {
+    #related { padding: var(--space-xl); }
+}
+
+#related ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin: 0 0 var(--space-xl) 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#related li a {
+    display: block;
+    color: inherit;
+    background-color: white;
+    border: 1px solid var(--color-medium);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#related li a:hover {
+    transform: translateY(calc(-1 * var(--space-xs)));
+    box-shadow: 0 var(--space-xs) var(--space-sm) rgba(0,0,0,0.1);
+}
+
+#related .gatsby-image-wrapper {
+    width: 100%;
+    height: calc(var(--space-3xl) * 1.50);
+}
+
+#related main { padding: var(--space-lg); }
+
+#related h3 { margin: 0 0 var(--space-sm) 0; }
