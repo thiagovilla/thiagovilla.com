@@ -1,6 +1,6 @@
 import React from "react";
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
   setHeadComponents([
     <link
       key="purecss"
@@ -22,5 +22,9 @@ export const onRenderBody = ({ setHeadComponents }) => {
       crossOrigin="anonymous"
       referrerPolicy="no-referrer"
     />,
+  ]);
+
+  setPostBodyComponents([
+    <div key="toast-portal" id="toast-portal"></div>,
   ]);
 };
