@@ -22,7 +22,7 @@ const Toast = ({ message, open }) => {
         display: 'flex',
         alignItems: 'center',
         gap: 'var(--space-xs)',
-        fontSize: 'var(--font-size-body-small)',
+        fontSize: 'var(--font-size-small)',
       }}>
         <PiCheck size={16} />
         {message && message}

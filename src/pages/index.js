@@ -1,9 +1,37 @@
 import React from "react";
-import BaseLayout from "../layout/BaseLayout";
-import homepageData from "../data/homepage.json";
+import { graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const IndexPage = () => {
-  const data = homepageData;
+import homepageData from "../data/homepage.json";
+import BaseLayout from "../layout/BaseLayout";
+import getRelativeTime from "../utils/get-relative-time";
+
+export const query = graphql`
+  query LatestPosts {
+    latestPosts: allMarkdownRemark(
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 3
+    ) {
+      nodes {
+        frontmatter {
+          date
+          title
+          category
+        }
+        fields {
+          slug
+        }
+        featuredImageFile {
+          childImageSharp {
+            gatsbyImageData(width: 360, layout: CONSTRAINED)
+          }
+        }
+      }
+    }
+  }
+ `;
+
+const IndexPage = ({ data }) => {
   const features = [
     {
       title: "Engineering-Driven Problem Solving",
@@ -157,6 +185,30 @@ const IndexPage = () => {
           Work With Me
         </a>
       </section>
+      <section id="posts">
+        <h2>Latest Posts</h2>
+        <ul>
+          {data.latestPosts.nodes.map(post => (
+            <li key={post.fields.slug}>
+              <a href={"blog/" + post.fields.slug} className="color-inherit">
+                {post.featuredImageFile && (
+                  <GatsbyImage
+                    image={getImage(post.featuredImageFile)}
+                    alt={post.frontmatter.featuredImageAlt ?? post.frontmatter.title}
+                  />
+                )}
+                <main>
+                  <p className="text-small">
+                    <time dateTime={post.frontmatter.date}>{getRelativeTime(post.frontmatter.date)}</time>
+                    <strong className="badge">{post.frontmatter.category}</strong>
+                  </p>
+                  <h3>{post.frontmatter.title}</h3>
+                </main>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
       <div className="container">
         <section id="services">
           <h2>Strengthening Businesses Through Technology</h2>
@@ -237,7 +289,7 @@ const IndexPage = () => {
       </section>
       <div id="contact" className="contact-section">
         <div className="content">
-          <h2 className="content-head">{data.contact.title}</h2>
+          <h2 className="content-head">{homepageData.contact.title}</h2>
           <div className="contact-container">
             <div className="contact-info">
               <div className="contact-item">
@@ -253,30 +305,30 @@ const IndexPage = () => {
                     color: "inherit"
                   }}
                   onClick={() => {
-                    window.location.href = "mailto:" + data.contact.email;
+                    window.location.href = "mailto:" + homepageData.contact.email;
                   }}
                 >
-                  {data.contact.email}
+                  {homepageData.contact.email}
                 </button>
               </div>
               <div className="contact-item">
                 <span className="contact-label">Website:</span>
                 <a
-                  href={data.contact.website}
+                  href={homepageData.contact.website}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {data.contact.website.replace(/^https?:\/\//, "")}
+                  {homepageData.contact.website.replace(/^https?:\/\//, "")}
                 </a>
               </div>
               <div className="contact-item"></div>
               <span className="contact-label">LinkedIn:</span>
               <a
-                href={data.contact.linkedin}
+                href={homepageData.contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {data.contact.linkedin.replace(/^https?:\/\//, "")}
+                {homepageData.contact.linkedin.replace(/^https?:\/\//, "")}
               </a>
             </div>
           </div>

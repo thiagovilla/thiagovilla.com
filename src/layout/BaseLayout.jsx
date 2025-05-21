@@ -5,7 +5,7 @@ import "../styles.css";
 function PromoBar() {
   return (
     <section id="promo-bar">
-      <a href="#contact">I'm available for hiring. Hire now.</a>
+      <a href="#contact">I'm available for hiring. <span style={{ textDecoration: 'underline' }}>Hire now</span>.</a>
     </section>
   );
 }
@@ -13,12 +13,12 @@ function PromoBar() {
 function Header() {
   return (
     <div className="header">
-      <nav className="home-menu pure-menu pure-menu-horizontal">
+      <nav className="home-menu pure-menu">
         <a className="pure-menu-heading" href="/">
           Thiago Villa
         </a>
 
-        <ul className="pure-menu-list">
+        <ul className="pure-menu-list pure-menu-horizontal">
           <li className="pure-menu-item pure-menu-selected">
             <a href="/" className="pure-menu-link">
               Home
