@@ -2,9 +2,9 @@ import React from "react";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import homepageData from "../data/homepage.json";
 import BaseLayout from "../layout/BaseLayout";
 import getRelativeTime from "../utils/get-relative-time";
+import { PiEnvelope, PiGlobe, PiLinkedinLogo } from "react-icons/pi";
 
 export const query = graphql`
   query LatestPosts {
@@ -96,7 +96,7 @@ const IndexPage = ({ data }) => {
             <cite>Tyler Shambora</cite>
           </blockquote>
           <div className="pure-u-lg-1-2">
-            <h2>Main Stack</h2>
+            <h2 className="text-h2 home-h2">Main Stack</h2>
             <ul className="list-inline">
               {[
                 "Node",
@@ -108,7 +108,7 @@ const IndexPage = ({ data }) => {
             </ul>
           </div>
           <div className="pure-u-lg-1-2">
-            <h2>Trusted by cloud-native innovators</h2>
+            <h2 className="text-h2 home-h2">Trusted by cloud-native innovators</h2>
             <ul className="list-inline">
               {[
                 "The Meet Group",
@@ -119,23 +119,23 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
         <section id="benefits">
-          <h2>What I Bring to the Table</h2>
+          <h2 className="text-h2 home-h2">What I Bring to the Table</h2>
           <ul>
             {[
               {
                 icon: "🏗️",
                 title: "Software that Works, Long-Term",
-                description: "I go beyond writing code—I build robust architectures that scale with your business.",
+                description: "I go beyond writing code—I build robust architectures that scale with your business."
               },
               {
                 icon: "🎯",
                 title: "Technology That Adapts to You",
-                description: "I align software decisions with your goals, prioritizing long-term impact over fleeting trends.",
+                description: "I align software decisions with your goals, prioritizing long-term impact over fleeting trends."
               },
               {
                 icon: "🔄",
                 title: "Expertise Across the Full Development Cycle",
-                description: "From strategy to deployment, I handle every phase, giving you the freedom to focus elsewhere.",
+                description: "From strategy to deployment, I handle every phase, giving you the freedom to focus elsewhere."
               }
             ].map((benefit) => (
               <li key={benefit.title}>
@@ -148,7 +148,7 @@ const IndexPage = ({ data }) => {
         </section>
       </div>
       <section id="projects">
-        <h2>Driving Efficiency & Long-Term Stability</h2>
+        <h2 className="text-h2 home-h2">Driving Efficiency & Long-Term Stability</h2>
         <p>Check out some of my clients' success stories.</p>
         <ul>
           {[
@@ -186,7 +186,7 @@ const IndexPage = ({ data }) => {
         </a>
       </section>
       <section id="posts">
-        <h2>Latest Posts</h2>
+        <h2 className="text-h2 home-h2">Latest Posts</h2>
         <ul>
           {data.latestPosts.nodes.map(post => (
             <li key={post.fields.slug}>
@@ -211,7 +211,7 @@ const IndexPage = ({ data }) => {
       </section>
       <div className="container">
         <section id="services">
-          <h2>Strengthening Businesses Through Technology</h2>
+          <h2 className="text-h2 home-h2">Strengthening Businesses Through Technology</h2>
           <p>I work with high-growth companies to design, develop, and deploy resilient software that drives real
             impact.</p>
           <ul>
@@ -243,7 +243,7 @@ const IndexPage = ({ data }) => {
       </div>
       <section id="features">
         <div className="container">
-          <h2>More Features & Benefits</h2>
+          <h2 className="text-h2 home-h2">More Features & Benefits</h2>
           <ul>
             {features.map(({ title, description }) => (
               <li key={title}>
@@ -256,7 +256,7 @@ const IndexPage = ({ data }) => {
       </section>
       <section id="sturdy-software">
         <div>
-          <h2>Why Sturdy Software Matters?</h2>
+          <h2 className="text-h2 home-h2">Why Sturdy Software Matters?</h2>
           <p>I believe software should be <strong>strong</strong>—more than just functional, it must be resilient,
             structured, and built
             to last.</p>
@@ -274,7 +274,7 @@ const IndexPage = ({ data }) => {
       </section>
       <section id="why-tech">
         <div className="container">
-          <h2>Why I Work in Tech</h2>
+          <h2 className="text-h2 home-h2">Why I Work in Tech</h2>
           <ul>
             {
               whys.map(({ title, description }) => (
@@ -287,112 +287,60 @@ const IndexPage = ({ data }) => {
           </ul>
         </div>
       </section>
-      <div id="contact" className="contact-section">
-        <div className="content">
-          <h2 className="content-head">{homepageData.contact.title}</h2>
-          <div className="contact-container">
-            <div className="contact-info">
-              <div className="contact-item">
-                <span className="contact-label">Email:</span>
-                <button
-                  className="email-link"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: 0,
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                    color: "inherit"
-                  }}
-                  onClick={() => {
-                    window.location.href = "mailto:" + homepageData.contact.email;
-                  }}
-                >
-                  {homepageData.contact.email}
-                </button>
-              </div>
-              <div className="contact-item">
-                <span className="contact-label">Website:</span>
-                <a
-                  href={homepageData.contact.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {homepageData.contact.website.replace(/^https?:\/\//, "")}
-                </a>
-              </div>
-              <div className="contact-item"></div>
-              <span className="contact-label">LinkedIn:</span>
-              <a
-                href={homepageData.contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {homepageData.contact.linkedin.replace(/^https?:\/\//, "")}
-              </a>
-            </div>
-          </div>
-          <div className="contact-form-container">
-            <form
-              className="contact-form"
-              name="contact"
-              method="POST"
-              data-netlify="true"
-              hidden
-            >
-              <input type="hidden" name="form-name" value="contact" />
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Your email address"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="How can I help you?"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
+      <div className="container">
+        <section id="contact">
+          <h2 className="text-h2 home-h2">Work With Me</h2>
+          <dl className="pure-u-lg-1-2">
+            <dt className="text-h3 pure-u-lg-1-3"><PiEnvelope size={24} style={{ verticalAlign: 'middle' }} /> Email</dt>
+            <dd className="pure-u-lg-2-3">
               <button
-                type="submit"
-                className="pure-button pure-button-primary"
+                onClick={() => window.location.href = ["mailto:thiago@", "thiagovilla.com"].join("")}
+                aria-label="Send email to Thiago" className="btn-reset btn-link cursor-pointer"
               >
-                Send Message
+                <ul className="list-inline">
+                  <li>thiago</li>
+                  <li>@</li>
+                  <li>thiagovilla.com</li>
+                </ul>
               </button>
-            </form>
-
-            <iframe
-              title="Hire Thiago Now"
-              aria-label="Hire Thiago Now"
-              style={{ height: 810, width: "99%", border: 0 }}
-              src="https://forms.zohopublic.com/thiagothiag1/form/HireThiagoNow/formperma/lTsp41KuOlThP8T1qsrB-imczLzyeskqU31xarN6WUM"
-            ></iframe>
-          </div>
-        </div>
+            </dd>
+            <dt className="text-h3 pure-u-lg-1-3"><PiGlobe size={24} style={{ verticalAlign: 'middle' }} /> Website</dt>
+            <dd className="pure-u-lg-2-3"><a href="https://thiagovilla.com">thiagovilla.com</a></dd>
+            <dt className="text-h3 pure-u-lg-1-3"><PiLinkedinLogo size={24} style={{ verticalAlign: 'middle' }} /> LinkedIn</dt>
+            <dd className="pure-u-lg-2-3"><a
+              href="https://linkedin.com/in/othiagovilla"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              othiagovilla
+            </a></dd>
+          </dl>
+          <form
+            action="https://forms.zohopublic.com/thiagothiag1/form/HireThiagoNow/formperma/kdKqnSM0XdbmTTA-H2YVvCPrwm6SE_G55Bawn-p9PXw/htmlRecords/submit"
+            method="POST" acceptCharset="UTF-8" encType="multipart/form-data"
+            className="pure-u-lg-1-2">
+            <input type="hidden" name="zf_referrer_name" value="" />
+            <input type="hidden" name="zf_redirect_url" value="" />
+            <input type="hidden" name="zc_gad" value="" />
+            <label htmlFor="SingleLine">Name</label>
+            <input type="text" name="SingleLine" fieldType="1" maxLength="255" placeholder="Your&#x20;name"
+                   autoComplete="name" required={true} />
+            <label htmlFor="Email">Email</label>
+            <input type="email" maxLength="255" name="Email" fieldType="9" placeholder="Your&#x20;email"
+                   autoComplete="email" required={true} />
+            <label htmlFor="MultiLine">Message</label>
+            <textarea name="MultiLine" maxLength="65535" placeholder="I want to hire you." rows={4} required={true}></textarea>
+            <button type="submit">Send now</button>
+          </form>
+        </section>
       </div>
     </BaseLayout>
-  );
+  )
+    ;
 };
 
 export default IndexPage;
 
 export const Head = () =>
-  <title>Thiago Villa - Senior Fullstack Software Engineer</title>;
+  <title>Thiago Villa - Senior Fullstack Software Engineer</title>
+;
