@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "tech-stack",
+    "question": "What technologies do you specialize in?",
+    "answer": "My core tech stack includes **Node.js**, **React**, and **AWS**. I'm particularly experienced with modern JavaScript frameworks, cloud architecture, and CI/CD pipelines. For database work, I use both SQL (PostgreSQL) and NoSQL (MongoDB) solutions depending on project requirements.",
+    "category": "Skills",
+    "tags": ["JavaScript", "Node.js", "React", "AWS"],
+    "featured": true,
+    "addedDate": "2024-10-10",
+    "source": null
+  },
+  {
+    "slug": "project-timeline",
+    "question": "How long does a typical project take?",
+    "answer": "Project timelines vary based on scope and complexity. A typical web application might take 2-3 months from concept to launch, while smaller projects can be completed in 3-4 weeks. I always provide detailed timelines during the planning phase and use agile methodologies to ensure regular deliverables throughout the development process.",
+    "category": "Process",
+    "tags": ["Project Management", "Timeline"],
+    "featured": true,
+    "addedDate": "2024-10-11",
+    "source": null
+  },
+  {
+    "slug": "remote-work",
+    "question": "Do you work remotely?",
+    "answer": "Yes, I work 100% remotely with clients around the globe. I've built a workflow that ensures seamless collaboration across different time zones, using tools like Slack, Zoom, and project management software to maintain clear communication throughout the development process.",
+    "category": "Collaboration",
+    "tags": ["Remote Work", "Communication"],
+    "featured": true,
+    "addedDate": "2024-10-12",
+    "source": null
+  },
+  {
+    "slug": "code-maintenance",
+    "question": "How do you ensure code quality and maintainability?",
+    "answer": "I follow several practices to ensure code quality: **Clean Code Principles** - Writing readable, self-documenting code; **Test-Driven Development** - Writing tests before implementation; **Code Reviews** - Regular peer reviews for quality assurance; **Documentation** - Thorough inline comments and external documentation; **CI/CD Pipelines** - Automated testing and deployment. These practices result in more maintainable, reliable software that's easier to extend and update over time.",
+    "category": "Development",
+    "tags": ["Quality Assurance", "Best Practices"],
+    "featured": true,
+    "addedDate": "2024-10-13",
+    "source": "https://martinfowler.com/articles/is-quality-worth-cost.html"
+  },
+  {
+    "slug": "pricing-model",
+    "question": "What is your pricing model?",
+    "answer": "I offer flexible pricing options: **Project-based** - Fixed price for defined scope; **Hourly/weekly rates** - For ongoing development or maintenance; **Retainer agreements** - Reserved hours each month. For most client projects, I recommend project-based pricing with clearly defined milestones and deliverables. This provides budget certainty while ensuring high-quality results.",
+    "category": "Business",
+    "tags": ["Pricing", "Contracts"],
+    "featured": false,
+    "addedDate": "2024-10-14",
+    "source": null
+  }
+]

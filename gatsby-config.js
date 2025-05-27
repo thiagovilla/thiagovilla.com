@@ -53,5 +53,11 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
+    // For JSON FAQs
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: { path: './src/data/' },
+    },
+    'gatsby-transformer-json',
   ],
 };

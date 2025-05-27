@@ -1,13 +1,15 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-
-import BaseLayout from "../layout/BaseLayout";
-import getRelativeTime from "../utils/get-relative-time";
 import { PiEnvelope, PiGlobe, PiLinkedinLogo } from "react-icons/pi";
 
+import "./index.css";
+import BaseLayout from "../layout/BaseLayout";
+import getRelativeTime from "../utils/get-relative-time";
+import FaqAccordion from "../components/FaqAccordion";
+
 export const query = graphql`
-  query LatestPosts {
+  query LatestPostsAndFaqs {
     latestPosts: allMarkdownRemark(
       sort: {fields: frontmatter___date, order: DESC}
       limit: 3
@@ -26,6 +28,18 @@ export const query = graphql`
             gatsbyImageData(width: 360, layout: CONSTRAINED)
           }
         }
+      }
+    }
+    allFaqsJson(filter: {featured: {eq: true}}) {
+      nodes {
+        slug
+        question
+        answer
+        category
+        tags
+        featured
+        addedDate
+        source
       }
     }
   }
@@ -88,7 +102,7 @@ const IndexPage = ({ data }) => {
           <p>I build sturdy, structured, and scalable software—designed to grow, adapt, and withstand the test of time.
             Let's build your product to last.</p>
           <ul className="list-inline">
-            <li><a href="#contact" className="pure-button pure-button-primary">Work With Me</a></li>
+            <li><a href="/#contact" className="pure-button pure-button-primary">Work With Me</a></li>
             <li><a href="https://linkedin.com/in/othiagovilla" className="pure-button">Check My LinkedIn</a></li>
           </ul>
           <blockquote>
@@ -181,7 +195,7 @@ const IndexPage = ({ data }) => {
             </li>
           ))}
         </ul>
-        <a href="#contact" className="pure-button pure-button-primary">
+        <a href="/#contact" className="pure-button pure-button-primary">
           Work With Me
         </a>
       </section>
@@ -288,10 +302,16 @@ const IndexPage = ({ data }) => {
         </div>
       </section>
       <div className="container">
+        <section id="faqs-hp">
+          <h2 className="text-h2 home-h2">Frequently Asked Questions</h2>
+          <p>Common questions about my services and work process</p>
+          <FaqAccordion faqs={data.allFaqsJson.nodes} />
+        </section>
         <section id="contact">
           <h2 className="text-h2 home-h2">Work With Me</h2>
           <dl className="pure-u-lg-1-2">
-            <dt className="text-h3 pure-u-lg-1-3"><PiEnvelope size={24} style={{ verticalAlign: 'middle' }} /> Email</dt>
+            <dt className="text-h3 pure-u-lg-1-3"><PiEnvelope size={24} style={{ verticalAlign: "middle" }} /> Email
+            </dt>
             <dd className="pure-u-lg-2-3">
               <button
                 onClick={() => window.location.href = ["mailto:thiago@", "thiagovilla.com"].join("")}
@@ -304,9 +324,11 @@ const IndexPage = ({ data }) => {
                 </ul>
               </button>
             </dd>
-            <dt className="text-h3 pure-u-lg-1-3"><PiGlobe size={24} style={{ verticalAlign: 'middle' }} /> Website</dt>
+            <dt className="text-h3 pure-u-lg-1-3"><PiGlobe size={24} style={{ verticalAlign: "middle" }} /> Website</dt>
             <dd className="pure-u-lg-2-3"><a href="https://thiagovilla.com">thiagovilla.com</a></dd>
-            <dt className="text-h3 pure-u-lg-1-3"><PiLinkedinLogo size={24} style={{ verticalAlign: 'middle' }} /> LinkedIn</dt>
+            <dt className="text-h3 pure-u-lg-1-3"><PiLinkedinLogo size={24}
+                                                                  style={{ verticalAlign: "middle" }} /> LinkedIn
+            </dt>
             <dd className="pure-u-lg-2-3"><a
               href="https://linkedin.com/in/othiagovilla"
               target="_blank"
@@ -323,13 +345,14 @@ const IndexPage = ({ data }) => {
             <input type="hidden" name="zf_redirect_url" value="" />
             <input type="hidden" name="zc_gad" value="" />
             <label htmlFor="SingleLine">Name</label>
-            <input type="text" name="SingleLine" fieldType="1" maxLength="255" placeholder="Your&#x20;name"
+            <input type="text" name="SingleLine" maxLength="255" placeholder="Your&#x20;name"
                    autoComplete="name" required={true} />
             <label htmlFor="Email">Email</label>
-            <input type="email" maxLength="255" name="Email" fieldType="9" placeholder="Your&#x20;email"
+            <input type="email" maxLength="255" name="Email" placeholder="Your&#x20;email"
                    autoComplete="email" required={true} />
             <label htmlFor="MultiLine">Message</label>
-            <textarea name="MultiLine" maxLength="65535" placeholder="I want to hire you." rows={4} required={true}></textarea>
+            <textarea name="MultiLine" maxLength="65535" placeholder="I want to hire you." rows={4}
+                      required={true}></textarea>
             <button type="submit">Send now</button>
           </form>
         </section>
