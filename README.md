@@ -97,3 +97,7 @@ moving to Gatsby 5:
 `gatsby-remark-images`: 6 -> 7
 `gatsby-plugin-sharp`: 4 -> 6
 `gatsby-transformer-sharp`: 4 -> 5
+
+As of 05/26/25 (Talc V5 - FAQs). Required for FAQ JSON file.
+
+`gatsby-transformer-json`: 4 -> 5

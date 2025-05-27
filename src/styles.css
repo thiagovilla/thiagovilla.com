@@ -170,7 +170,7 @@ a.color-inherit { color: inherit }
 
 .pure-button:hover { color: var(--color-primary) }
 
-.pure-button-primary { background-color: var(--color-accent) }
+.pure-button-primary { background-color: var(--color-accent) !important }
 
 /* Menu Styles */
 .home-menu {
@@ -205,6 +205,8 @@ a.color-inherit { color: inherit }
     border: none;
     color: var(--color-accent);
 }
+
+.home-menu .pure-menu-selected a { color: white !important }
 
 /* TYPOGRAPHY */
 
@@ -284,7 +286,7 @@ h3, .text-h3, #hero h2, #benefits h3, #projects h3, #post h3, #related h2 {
 
 /* Category badge */
 
-.badge, #post header strong {
+.badge, #post header strong, .faq-accordion cite {
     display: inline-block;
     padding: calc(var(--space-xs) / 4) var(--space-xs);
     color: white;
@@ -326,13 +328,13 @@ h3, .text-h3, #hero h2, #benefits h3, #projects h3, #post h3, #related h2 {
 
 /* Tag list */
 
-#projects > ul > li > ul:last-of-type, #post header ul {
+#projects > ul > li > ul:last-of-type, #post header ul, .faq-accordion footer ul {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
 }
 
-#projects > ul > li > ul:last-of-type li, #post header ul:first-of-type li {
+#projects > ul > li > ul:last-of-type li, #post header ul:first-of-type li, .faq-accordion footer li {
     background-color: #f0f5f9;
     padding: 0.3rem 0.7rem;
     color: var(--color-secondary);
@@ -360,13 +362,13 @@ h3, .text-h3, #hero h2, #benefits h3, #projects h3, #post h3, #related h2 {
 
 /* FOOTER */
 
-footer {
+#footer {
     background: #111;
     padding: 12px 32px;
     text-align: center;
 }
 
-footer p { margin: 0 }
+#footer p { margin: 0 }
 
 /* HOME PAGE */
 
@@ -836,6 +838,160 @@ footer p { margin: 0 }
 
 @media (min-width: 48rem) {
     #why-tech ul { flex-direction: row }
+}
+
+/* FAQ SECTION */
+
+#faqs-hp {
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-xl) 0;
+}
+
+#faqs-hp > p {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+#faqs-hp > ul {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.faq-accordion, .faq-accordion ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.faq-accordion article {
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--color-medium);
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.faq-accordion details { width: 100% }
+
+.faq-accordion summary {
+    padding: var(--space-md);
+    padding-right: var(--space-xl);
+    color: var(--color-primary);
+    cursor: pointer;
+    position: relative;
+    list-style: none; /* Firefox */
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semibold);
+}
+
+.faq-accordion summary::-webkit-details-marker { display: none } /* Chrome/Safari */
+
+.faq-accordion summary::after {
+    content: "+";
+    position: absolute;
+    right: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-accordion details[open] summary::after { content: "−" }
+
+.faq-accordion summary:hover { background-color: var(--background-medium) }
+
+.faq-accordion main {
+    padding: var(--space-md);
+    border-top: 1px solid var(--color-medium);
+    line-height: 1.5;
+}
+
+.faq-accordion footer {
+    font-size: var(--font-size-small);
+    padding: 0 var(--space-md) var(--space-md);
+}
+
+.faq-accordion cite {
+    font-style: normal;
+    margin: 0 var(--space-md) var(--space-xs) 0;
+}
+
+.faq-accordion time { color: var(--text-light) }
+
+/* Full FAQs page styles */
+.faq-category-section, 
+section.faq-category {
+    margin-bottom: var(--space-2xl);
+}
+
+.faq-category-section h2, 
+section.faq-category h2 {
+    margin-bottom: var(--space-lg);
+    color: var(--color-primary);
+    font-size: var(--font-size-h2);
+}
+
+.faq-tags, 
+article.faq .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.faq-tag, 
+article.faq .tag {
+    background-color: var(--color-light);
+    padding: calc(var(--space-xs) / 4) var(--space-xs);
+    border-radius: 4px;
+    color: var(--color-secondary);
+    font-size: var(--font-size-caption);
+}
+
+.faq-source, 
+article.faq .source {
+    margin-left: auto;
+}
+
+.faq-source a, 
+article.faq .source a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    font-size: var(--font-size-caption);
+}
+
+.faq-source a:hover, 
+article.faq .source a:hover {
+    color: var(--color-accent);
+}
+
+/* FAQ page navigation */
+.faq-nav {
+    margin-bottom: var(--space-xl);
+}
+
+.faq-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-nav li a {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--background-medium);
+    border-radius: 4px;
+    font-weight: var(--font-weight-semibold);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.faq-nav li a:hover,
+.faq-nav li a.active {
+    background-color: var(--color-secondary);
+    color: white;
 }
 
 #why-tech li {

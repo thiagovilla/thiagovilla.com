@@ -1,0 +1,20 @@
+#faqs-pg { padding-top: var(--space-2xl) }
+
+#faqs-pg h1, #faqs-pg > p { margin-bottom: var(--space-lg) }
+
+#faqs-pg > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+}
+
+#faqs-pg > ul > li { flex: 1 1 100% }
+
+@media (min-width: 48rem) {
+    #faqs-pg > ul > li { flex: 0 0 calc(50% - var(--space-xl)) }
+}
+
+#faqs-pg > ul > li h2 { margin-bottom: var(--space-md) }
