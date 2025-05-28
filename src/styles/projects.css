@@ -1,0 +1,116 @@
+/*************************/
+/*   PROJECT LIST PAGE   */
+/*************************/
+
+#proj-list { padding: var(--space-2xl) 0 }
+
+#proj-list > header {
+  margin-bottom: 2rem;
+}
+
+/****************************/
+/*   PROJECT DETAILS PAGE   */
+/****************************/
+
+#proj-dets {
+  padding: var(--space-2xl) 0;
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 48rem) {
+  #proj-dets { grid-template-columns: 2fr 1fr }
+
+  #proj-dets header, #proj-dets main { grid-column: 1 }
+
+  #proj-dets aside {
+    grid-row: 1 / span 3;
+    grid-column: 2;
+  }
+}
+
+#proj-dets nav { margin-bottom: var(--space-lg) }
+
+#proj-dets nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 0;
+  font-size: var(--font-size-small);
+}
+
+#proj-dets nav li:not(:last-child)::after {
+  content: "/";
+  margin: 0 var(--space-xs);
+  color: var(--text-light);
+}
+
+#proj-dets header > div {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+#proj-dets header > div > a {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: var(--color-secondary);
+}
+
+#proj-dets header > div > a:hover { color: var(--color-accent) }
+
+#proj-dets aside {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+#proj-dets aside section {
+  background: #fff;
+  padding: var(--space-lg);
+  border-radius: 4px;
+}
+
+#proj-dets aside h2 {
+  font-size: var(--font-size-large);
+  margin-bottom: var(--space-md);
+}
+
+#proj-dets aside ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#proj-dets aside li {
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--background-medium);
+}
+
+#proj-dets aside li:last-child { border: 0 }
+
+#proj-dets footer h2 { margin-bottom: var(--space-xl) }
+
+#proj-dets footer ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+  #proj-dets footer ul {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+#proj-dets footer li {
+  background: white;
+  padding: var(--space-lg);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#proj-dets footer li h3 { margin-bottom: var(--space-sm) }
+
+#proj-dets footer li p { margin-bottom: var(--space-md) }

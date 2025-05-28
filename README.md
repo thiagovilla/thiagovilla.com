@@ -101,3 +101,7 @@ moving to Gatsby 5:
 As of 05/26/25 (Talc V5 - FAQs). Required for FAQ JSON file.
 
 `gatsby-transformer-json`: 4 -> 5
+
+As of 05/27/25 (Talc V6 - YAML projects).
+
+`gatsby-transformer-yaml`: 4 -> 5

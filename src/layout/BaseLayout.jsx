@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles.css";
+import "../styles/main.css";
 import { PiLinkedinLogo } from "react-icons/pi";
 
 function PromoBar() {

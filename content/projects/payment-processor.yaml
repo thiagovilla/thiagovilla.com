@@ -1,0 +1,30 @@
+# Major Payment Processor project
+slug: payment-processor
+title: Major Payment Processor
+excerpt: Accelerated large-scale systems testing at a major payment processor, enabling faster adoption of their new checkout experience across **hundreds of microservices**.
+description: |
+  Accelerated large-scale systems testing at a major payment processor, 
+  enabling faster adoption of their new checkout experience across 
+  **hundreds of microservices**.
+  
+  The implementation included automated testing infrastructure and 
+  mock service workers to simulate various payment scenarios.
+  
+  ¹Company name confidential under NDA.
+skills:
+  - System Modernization
+  - Scalable Architecture
+  - API Optimization
+  - Cross-Team Collaboration
+techStack:
+  - React
+  - Next.js
+  - Playwright
+  - MSW
+media:
+  - url: https://example.com/payment-1.jpg
+    title: Checkout Flow
+    description: The modernized checkout experience with improved conversion rates
+  - url: https://example.com/payment-2.jpg
+    title: Testing Dashboard
+    description: Custom testing dashboard showing test coverage and results

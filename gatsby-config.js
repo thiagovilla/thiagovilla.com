@@ -59,5 +59,11 @@ module.exports = {
       options: { path: './src/data/' },
     },
     'gatsby-transformer-json',
+    // For YAML projects
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: { path: './content/projects/' },
+    },
+    'gatsby-transformer-yaml',
   ],
 };

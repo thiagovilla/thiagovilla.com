@@ -1,14 +1,19 @@
 /**
- * Simple markdown to HTML converter for FAQ answers
- * Handles basic Markdown syntax: bold, italic, and links only
+ * Simple Markdown to HTML converter
+ * Handles basic Markdown syntax: bold, italic, links, and line breaks
  * @param {string} markdown - Markdown text to convert
  * @return {string} - HTML string
  */
 function markdownToHtml(markdown) {
   if (!markdown) return "";
+  
+  let html = markdown;
+
+  // Convert line breaks: \n\n -> <br /> if preserveLineBreaks is true 
+    html = html.replace(/\n\n/g, "<br /><br />");
 
   // Convert bold: **text** -> <strong>text</strong>
-  let html = markdown.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
   // Convert italic: *text* -> <em>text</em>
   html = html.replace(/\*(.*?)\*/g, "<em>$1</em>");

@@ -1,12 +1,13 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { PiEnvelope, PiGlobe, PiLinkedinLogo } from "react-icons/pi";
 
-import "./index.css";
+import "../styles/index.css";
 import BaseLayout from "../layout/BaseLayout";
 import getRelativeTime from "../utils/get-relative-time";
 import FaqAccordion from "../components/FaqAccordion";
+import ProjectCard from "../components/ProjectCard";
 
 export const query = graphql`
   query LatestPostsAndFaqs {
@@ -30,6 +31,16 @@ export const query = graphql`
         }
       }
     }
+              projects: allProjectsYaml(limit: 3) {
+                nodes {
+                  slug
+                  title
+                  excerpt
+                  description
+                  skills
+                  techStack
+                }
+              }
     allFaqsJson(filter: {featured: {eq: true}}) {
       nodes {
         slug
@@ -165,39 +176,20 @@ const IndexPage = ({ data }) => {
         <h2 className="text-h2 home-h2">Driving Efficiency & Long-Term Stability</h2>
         <p>Check out some of my clients' success stories.</p>
         <ul>
-          {[
-            {
-              client: "Major Payment Processor",
-              description: "Accelerated large-scale systems testing at a major payment processor, enabling faster adoption of their new checkout experience across hundreds of microservices.",
-              skills: ["System Modernization", "Scalable Architecture", "API Optimization", "Cross-Team Collaboration"],
-              stack: ["React", "Next.js", "Playwright", "MSW"]
-            },
-            {
-              client: "The Meet Group",
-              description: "Improved backend efficiency at TMG by sunsetting unused services, reducing system complexity and ensuring smooth scalability for millions of daily users.",
-              skills: ["Legacy Code Refactoring", "Strangle Pattern Migration", "Traffic & Dependency Analysis", "Zero-Downtime Deployments"],
-              stack: ["PHP", "Java", "Kibana", "Logstash"]
-            },
-            {
-              client: "Pack Digital",
-              description: "Reduced CMS cost for Pack Digital by migrating storefronts from third-party providers, cutting expenses without disrupting merchants.",
-              skills: ["Headless Ecommerce Development", "API & CMS Migration", "Developer Tooling & DX", "Authentication & Authorization"],
-              stack: ["React", "GraphQL", "Shopify", "Netlify"]
-            }
-          ].map((project) => (
-            <li key={project.client}>
-              <h3>{project.client}</h3>
-              <p>{project.description}</p>
-              <h4>Skills</h4>
-              <ul>{project.skills.map((skill) => (<li key={skill}>{skill}</li>))}</ul>
-              <h4>Stack</h4>
-              <ul>{project.stack.map((tech) => (<li key={tech}>{tech}</li>))}</ul>
+          {data.projects.nodes.map((project) => (
+            <li key={project.slug}>
+              <ProjectCard project={project} maxSkills={4} />
             </li>
           ))}
         </ul>
-        <a href="/#contact" className="pure-button pure-button-primary">
-          Work With Me
-        </a>
+        <div>
+          <Link to="/#contact" className="pure-button pure-button-primary" style={{ marginRight: "var(--space-xs)" }}>
+            Work With Me
+          </Link>
+          <Link to="/projects" className="pure-button">
+            View All Projects
+          </Link>
+        </div>
       </section>
       <section id="posts">
         <h2 className="text-h2 home-h2">Latest Posts</h2>

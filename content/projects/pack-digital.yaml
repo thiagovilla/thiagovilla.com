@@ -1,0 +1,27 @@
+# Pack Digital project
+slug: pack-digital
+title: Pack Digital
+excerpt: Reduced CMS cost for Pack Digital by **migrating storefronts** from third-party providers, cutting expenses without disrupting merchants.
+description: |
+  Reduced CMS cost for Pack Digital by **migrating storefronts** from third-party providers, 
+  cutting expenses without disrupting merchants.
+  
+  The migration involved developing custom components and ensuring a seamless transition
+  for all existing users and data.
+skills:
+  - Headless Ecommerce Development
+  - API & CMS Migration
+  - Developer Tooling & DX
+  - Authentication & Authorization
+techStack:
+  - React
+  - GraphQL
+  - Shopify
+  - Netlify
+media:
+  - url: https://example.com/pack-digital-1.jpg
+    title: Pack Digital Homepage
+    description: The newly migrated homepage with improved performance metrics
+  - url: https://example.com/pack-digital-2.jpg
+    title: Product Catalog
+    description: Custom product catalog implementation with enhanced filtering
