@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 import { PiCopy, PiEnvelope, PiInstagramLogo, PiLinkedinLogo, PiWhatsappLogo } from "react-icons/pi";
 
+import "../styles/blog.css";
 import MainLayout from "../layout/MainLayout";
 import Toast from "../components/Toast";
 import getRelativeTime from "../utils/get-relative-time";

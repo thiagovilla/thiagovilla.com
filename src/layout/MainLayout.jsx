@@ -1,6 +1,5 @@
 import React from "react";
 import BaseLayout from "./BaseLayout";
-import "../styles.css";
 
 function MainLayout(props) {
   return (

@@ -1,0 +1,28 @@
+# The Meet Group project
+slug: the-meet-group
+title: The Meet Group
+excerpt: Improved backend efficiency at TMG by sunsetting unused services, reducing system complexity and ensuring smooth scalability for **millions of daily users**.
+description: |
+  Improved backend efficiency at TMG by sunsetting unused services, 
+  reducing system complexity and ensuring smooth scalability for **millions of daily users**.
+  
+  The work involved careful analysis of dependencies and implementing the 
+  [Strangler Fig Pattern](https://martinfowler.com/bliki/StranglerFigApplication.html) 
+  to gradually migrate functionality.
+skills:
+  - Legacy Code Refactoring
+  - Strangle Pattern Migration
+  - Traffic & Dependency Analysis
+  - Zero-Downtime Deployments
+techStack:
+  - PHP
+  - Java
+  - Kibana
+  - Logstash
+media:
+  - url: https://example.com/tmg-1.jpg
+    title: System Architecture Diagram
+    description: Before and after architecture showing simplified system design
+  - url: https://example.com/tmg-2.jpg
+    title: Performance Metrics
+    description: Dashboard showing improved system performance after optimization

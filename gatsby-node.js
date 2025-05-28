@@ -48,11 +48,12 @@ exports.createResolvers = ({ createResolvers }) => {
   });
 };
 
-// Create blog post pages w/ blog.js template
+// Create blog post pages w/ blog.js template and project pages w/ project.js template
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const result = await graphql(`
+  // Create blog pages
+  const blogResult = await graphql(`
     {
       allMarkdownRemark {
         nodes {
@@ -67,13 +68,34 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  result.data.allMarkdownRemark.nodes.forEach((node) => {
+  blogResult.data.allMarkdownRemark.nodes.forEach((node) => {
     const slug = node.frontmatter.slug || node.fields.slug;
     createPage({
       path: `/blog/${slug}`,
       component: path.resolve("./src/templates/blog.js"),
       context: {
         slug,
+      },
+    });
+  });
+
+  // Create project pages
+  const projectResult = await graphql(`
+    {
+      allProjectsYaml {
+        nodes {
+          slug
+        }
+      }
+    }
+  `);
+
+  projectResult.data.allProjectsYaml.nodes.forEach((node) => {
+    createPage({
+      path: `/projects/${node.slug}`,
+      component: path.resolve("./src/templates/project.js"),
+      context: {
+        slug: node.slug,
       },
     });
   });

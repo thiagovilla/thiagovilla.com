@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { graphql } from "gatsby";
 
-import "./faqs.css";
+import "../styles/faqs.css";
 import BaseLayout from "../layout/BaseLayout";
 import FaqAccordion from "../components/FaqAccordion";
 
