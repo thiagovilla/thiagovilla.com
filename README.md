@@ -106,7 +106,8 @@ As of 05/27/25 (Talc V6 - YAML projects).
 
 `gatsby-transformer-yaml`: 4 -> 5
 
-As of 06/17/25 (Talc V7 - React common questions blog post).
+As of 06/17/25 (Talc V7 - brand visuals & polish).
 
 `gatsby-remark-prismjs`: 6 -> 7 (syntax highlighting)
 `gatsby-remark-autolink-headers:` 5 -> 6 (heading IDs)
+`gatsby-plugin-manifest`: 4 -> 5 (favicon)

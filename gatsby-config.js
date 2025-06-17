@@ -75,6 +75,19 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: { path: "./content/projects/" }
     },
-    "gatsby-transformer-yaml"
+    "gatsby-transformer-yaml",
+    // For favicon
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Thiago Villa - Senior Fullstack Software Engineer`,
+        short_name: `Thiago Villa`,
+        start_url: `/`,
+        background_color: `#1f3040`,
+        theme_color: `#e57d33`,
+        display: `standalone`,
+        icon: `src/images/favicon.png`
+      }
+    }
   ]
 };

@@ -6,18 +6,18 @@ import { PiLinkedinLogo } from "react-icons/pi";
 function PromoBar() {
   return (
     <section id="promo-bar">
-      <a href="/#contact">I'm available for hiring. <span style={{ textDecoration: 'underline' }}>Hire now</span>.</a>
+      <a href="/#contact">I'm available for hiring. <span style={{ textDecoration: "underline" }}>Hire now</span>.</a>
     </section>
   );
 }
 
 function Header() {
   const [pathname, setPathname] = React.useState("/");
-  
+
   React.useEffect(() => {
     setPathname(window.location.pathname);
   }, []);
-  
+
   const isActive = (path) => {
     if (path === "/" && pathname === "/") return true;
     return path !== "/" && pathname.startsWith(path);
@@ -27,40 +27,46 @@ function Header() {
     {
       path: "/",
       label: "Home",
-      checkActive: true,
+      checkActive: true
     },
     {
       path: "https://linkedin.com/in/othiagovilla",
       label: "LinkedIn",
       icon: <PiLinkedinLogo size={24} style={{ verticalAlign: "middle", marginRight: "0.25rem" }} />,
-      external: true,
+      external: true
     },
     {
       path: "/faqs",
       label: "FAQs",
-      checkActive: true,
+      checkActive: true
     },
     {
       path: "/#contact",
-      label: "Work With Me",
-    },
+      label: "Work With Me"
+    }
   ];
 
   return (
     <div className="header">
       <nav className="home-menu pure-menu">
-        <a className="pure-menu-heading" href="/">
-          Thiago Villa
+        <a className="pure-menu-heading" href="/" style={{ lineHeight: "100%" }}>
+          <img
+            src="/images/logo-dark.png"
+            srcSet="/images/logo-dark@2x.png 2x, /images/logo-dark@3x.png 3x"
+            alt="Thiago Villa"
+            style={{ height: "24px", width: "auto", verticalAlign: "middle" }}
+          />
+
         </a>
 
         <ul className="pure-menu-list pure-menu-horizontal">
           {navItems.map((item, index) => (
-            <li 
-              key={index} 
+            <li
+              key={index}
               className={`pure-menu-item ${item.checkActive && isActive(item.path) ? "pure-menu-selected" : ""}`}
             >
-              <a 
-                href={item.path} 
+              <a
+                href={item.path}
                 className="pure-menu-link"
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
