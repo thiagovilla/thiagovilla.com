@@ -3,7 +3,6 @@ import { graphql } from "gatsby";
 
 import "../styles/projects.css";
 import MainLayout from "../layout/MainLayout";
-import markdownToHtml from "../utils/markdown-to-html";
 import TitleWithBackButton from "../components/TitleWithBackButton";
 import Breadcrumbs from "../components/Breadcrumbs";
 import ProjectCard from "../components/ProjectCard";
@@ -20,30 +19,6 @@ import ProjectCard from "../components/ProjectCard";
  * @returns {JSX.Element} Projects page component
  */
 const ProjectsPage = ({ data: { projects: { nodes: projects } } }) => {
-
-  /**
-   * Truncates a project description and converts Markdown to HTML
-   *
-   * @param {string} description - Project description in Markdown format
-   * @param {number} length - Maximum length to truncate to
-   * @returns {string} Truncated HTML description
-   */
-  const getTruncatedDescription = (description, length = 200) => {
-    if (!description) return "";
-
-    // Replace line breaks with spaces for the truncated preview
-    const plainText = description.replace(/\n/g, " ");
-
-    // Truncate the text before processing Markdown
-    const truncated = plainText.length > length
-      ? plainText.substring(0, length) + "..."
-      : plainText;
-
-    // Process the Markdown after truncation, but don't preserve line breaks
-    // since we've already replaced them with spaces
-    return markdownToHtml(truncated);
-  };
-
   return (
     <MainLayout>
       <main id="proj-list">

@@ -253,7 +253,7 @@ a.color-inherit { color: inherit }
 }
 
 /* Body large */
-.text-large, #hero p, #projects > p, #post main p:first-of-type, #post h4, #related h3 {
+.text-large, .prose--lead, #hero p, #projects > p, #post h4, #related h3 {
     font-size: var(--font-size-large);
     line-height: 1.5;
     font-weight: 400;
@@ -450,6 +450,27 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
     background-color: var(--color-secondary);
     transform: translateX(-4px);
 }
+
+/* PROSE */
+
+.prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.prose ul, .prose ol {
+    padding-left: var(--space-xl);
+    list-style: initial;
+}
+
+.prose ul li::marker {
+    content: "◢  ";
+    color: var(--color-secondary);
+    font-size: var(--font-size-small);
+}
+
+.prose--code code { font-size: 90% } /* Default code font size */
 
 /****************/
 /*    LAYOUT    */

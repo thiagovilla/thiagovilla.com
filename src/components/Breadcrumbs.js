@@ -15,7 +15,7 @@ import { Link } from "gatsby";
  */
 const Breadcrumbs = ({ items }) => (
   <nav className="breadcrumbs" aria-label="Breadcrumbs" role="navigation">
-    <ol role="list">
+    <ol>
       {items.map((item, index) => (
         <li
           key={index}
