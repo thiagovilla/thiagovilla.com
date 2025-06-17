@@ -131,7 +131,7 @@ export default function BlogPost({ data }) {
               href={frontmatter.featuredImageCreditLink}>{frontmatter.featuredImageCreditText}</a></figcaption>}
           </figure>}
         </header>
-        <main dangerouslySetInnerHTML={{ __html: html }} />
+        <main className="prose prose--lead prose--code" dangerouslySetInnerHTML={{ __html: html }} />
       </article>
 
       <section id="bio">

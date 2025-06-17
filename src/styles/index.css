@@ -189,7 +189,8 @@
 }
 
 #posts li {
-    border-top: calc(var(--space-xs) / 2) solid var(--color-secondary)
+    border-top: calc(var(--space-xs) / 2) solid var(--color-secondary);
+    max-width: 360px;
 }
 
 #posts main {

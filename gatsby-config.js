@@ -1,5 +1,5 @@
 /**
- * @type {import('gatsby').GatsbyConfig}
+ * @type {import("gatsby").GatsbyConfig}
  */
 require("dotenv").config();
 
@@ -17,7 +17,7 @@ module.exports = {
         github: `https://github.com/thiagovilla`,
         twitter: `https://twitter.com/othiagovilla`
       }
-    },
+    }
   },
   plugins: [
     "gatsby-plugin-image",
@@ -25,45 +25,56 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: "./src/pages/",
+        path: "./src/pages/"
       },
-      __key: "pages",
+      __key: "pages"
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `blog`,
-        path: `./content/blog`,
-      },
+        path: `./content/blog`
+      }
     },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
           {
+            resolve: "gatsby-remark-autolink-headers",
+            options: { enableCustomId: true, isIconAfterHeader: true }
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
-              linkImagesToOriginal: false,
-            },
+              linkImagesToOriginal: false
+            }
           },
-        ],
-      },
+          // For Markdown code blocks
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              aliases: { sh: "bash" }
+            }
+          }
+        ]
+      }
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
     // For JSON FAQs
     {
-      resolve: 'gatsby-source-filesystem',
-      options: { path: './src/data/' },
+      resolve: "gatsby-source-filesystem",
+      options: { path: "./src/data/" }
     },
-    'gatsby-transformer-json',
+    "gatsby-transformer-json",
     // For YAML projects
     {
-      resolve: 'gatsby-source-filesystem',
-      options: { path: './content/projects/' },
+      resolve: "gatsby-source-filesystem",
+      options: { path: "./content/projects/" }
     },
-    'gatsby-transformer-yaml',
-  ],
+    "gatsby-transformer-yaml"
+  ]
 };

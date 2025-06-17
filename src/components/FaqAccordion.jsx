@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import markdownToHtml from "../utils/markdown-to-html";
 import getRelativeTime from "../utils/get-relative-time";
 
@@ -27,15 +27,11 @@ const FaqItem = memo(({ faq, isOpen, onClick }) => (
     <details
       id={faq.slug}
       open={isOpen}
-      onClick={(e) => {
-        // Only handle clicks on the summary element to avoid capturing clicks on the content
-        if (e.target.closest("summary") && onClick) {
-          e.preventDefault(); // Prevent default toggle behavior
-          onClick();
-        }
-      }}
     >
-      <summary>{faq.question}</summary>
+      <summary onClick={(e) => {
+        e.preventDefault(); // Prevent default toggle behavior
+        onClick();
+      }}>{faq.question}</summary>
       <section>
         <main dangerouslySetInnerHTML={{ __html: markdownToHtml(faq.answer) }} />
         <footer>
@@ -71,7 +67,7 @@ const FaqAccordion = ({ faqs, enableUrlHash = false }) => {
       setOpenSlug(openSlug === slug ? "" : slug);
       return;
     }
-    
+
     // If the clicked FAQ is already open, close it by clearing the slug and hash
     if (slug === openSlug) {
       setOpenSlug("");

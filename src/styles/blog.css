@@ -67,10 +67,7 @@
 #post header ul:last-of-type button:hover { color: var(--color-accent) }
 
 /* featured image */
-#post header figure, #related figure { margin: 0 }
-
-/* content */
-#post main p, #post main h2, #post main h3, #post main h4, #post main h5, #post main h6 { margin: 0 0 var(--space-lg) 0 }
+#post header figure { margin-bottom: var(--space-lg) }
 
 /* AUTHOR BIO */
 
