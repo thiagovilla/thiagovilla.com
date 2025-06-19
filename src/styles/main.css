@@ -40,19 +40,17 @@ Replace: { $1 }
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
 
-    --space-xs: .5rem; /* 8px  */
-    --space-sm: .75rem; /* 12px */
-    --space-md: 1rem; /* 16px */
-    --space-lg: 1.5rem; /* 24px */
-    --space-xl: 2rem; /* 32px */
-    --space-2xl: 3rem; /* 48px */
-    --space-3xl: 6rem; /* 96px */
+    --space-xs:  .5rem;  /* 8px  */
+    --space-sm:  .75rem; /* 12px */
+    --space-md:  1rem;   /* 16px */
+    --space-lg:  1.5rem; /* 24px */
+    --space-xl:  2rem;   /* 32px */
+    --space-2xl: 3rem;   /* 48px */
+    --space-3xl: 6rem;   /* 96px */
 }
 
 @media (min-width: 78em) {
-    :root {
-        --font-size-display: 3.15rem /* ~50.4px */;
-    }
+    :root { --font-size-display: 3.15rem /* ~50.4px */ }
 }
 
 /* BRAND FONT */
@@ -87,7 +85,7 @@ Replace: { $1 }
     font-display: swap;
 }
 
-/* BASE STYLES */
+/* GLOBAL RESETS */
 
 * {
     box-sizing: border-box;
@@ -104,37 +102,22 @@ Replace: { $1 }
 
 body {
     font-family: "Galano Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text-medium);
+    color: var(--color-primary);
     background-color: var(--background-light);
     font-weight: var(--font-weight-regular);
 }
 
-p, h1, h2, h3, h4, h5, h6 { margin: 0 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-label { color: var(--color-primary) }
-
 a {
-    color: var(--color-secondary);
     text-decoration: none;
-    transition: color 0.2s ease;
+    color: var(--color-secondary);
+    transition: color 0.2s ease; /* TODO: standardize timing */
 }
 
 a:hover { color: var(--color-accent) }
 
-strong,
-b { font-weight: var(--font-weight-semibold) }
+strong, b { font-weight: var(--font-weight-semibold) }
 
-ul, ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+ul, ol { list-style: none }
 
 /* UTILITY CLASSES */
 
@@ -146,25 +129,21 @@ a.color-inherit { color: inherit }
 
 .link-unstyled:hover { color: inherit }
 
-.btn-link { color: var(--color-secondary) }
-
-.btn-link:hover { color: var(--color-accent) }
-
-.icon-align { position: relative; top: 2px }
-
 .btn-reset {
     border: 0;
     padding: 0;
     background: none;
 }
 
+.btn-link { color: var(--color-secondary) }
+
+.btn-link:hover { color: var(--color-accent) }
+
+.icon-fix-align { position: relative; top: 2px }
+
 .cursor-pointer { cursor: pointer }
 
-.list-inline {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+.list-inline { list-style: none }
 
 .list-inline li { display: inline-block }
 
@@ -231,7 +210,7 @@ a.color-inherit { color: inherit }
 }
 
 /* Caption */
-.text-caption, #projects h4, #projects > ul > li > ul:last-of-type, .project-card h3 {
+.text-caption {
     font-size: var(--font-size-caption);
     font-weight: var(--font-weight-regular);
     line-height: 1.3;
@@ -240,28 +219,22 @@ a.color-inherit { color: inherit }
 }
 
 /* Body small */
-.text-small, #hero blockquote, #hero div li, #post header {
+.text-small {
     font-size: var(--font-size-small);
-    font-weight: var(--font-weight-regular);
     line-height: 1.4;
-    letter-spacing: 0;
 }
 
-.text-body, body {
-    font-size: var(--font-size-body);
-    line-height: 1.5;
-}
+/* Body regular */
+.text-body { line-height: 1.5 }
 
 /* Body large */
-.text-large, .prose--lead, #hero p, #projects > p, #post h4, #related h3 {
+.text-large, .prose--lead > p:first-child {
     font-size: var(--font-size-large);
     line-height: 1.5;
-    font-weight: 400;
-    letter-spacing: 0;
 }
 
 /* H3 */
-h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
+.text-h3, .prose h3 {
     font-size: var(--font-size-h3);
     font-weight: var(--font-weight-semibold);
     line-height: 1.4;
@@ -269,7 +242,7 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
 }
 
 /* H2 */
-.text-h2, #post h2 {
+.text-h2, .prose h2 {
     font-size: var(--font-size-h2);
     font-weight: var(--font-weight-semibold);
     line-height: 1.3;
@@ -277,7 +250,7 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
 }
 
 /* H1 */
-.text-h1, #hero h1, #post h1 {
+.text-h1 {
     font-size: var(--font-size-h1);
     font-weight: var(--font-weight-bold);
     line-height: 1.2;
@@ -286,7 +259,7 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
 
 /* Display */
 @media (min-width: 48rem) {
-    #hero h1 {
+    #hero h1.text-h1 {
         font-size: var(--font-size-display);
         font-weight: var(--font-weight-bold);
         line-height: 1.1;
@@ -294,16 +267,30 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
     }
 }
 
-/* SHARED STYLES */
+/********************/
+/*    COMPONENTS    */
+/********************/
 
-/* Category badge */
+/* BADGE */
 
-.badge, #post header strong, .faq-accordion cite {
+.badge {
+    color: var(--color-secondary);
+    background-color: #f0f5f9;
+    padding: calc(var(--space-xs) / 2) var(--space-sm);
+}
+
+.badge--primary {
     display: inline-block;
     padding: calc(var(--space-xs) / 4) var(--space-xs);
     color: white;
     background-color: var(--color-secondary);
     font-weight: var(--font-weight-regular);
+}
+
+.badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
 }
 
 /* Featured image */
@@ -338,21 +325,6 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
 
 /* Shadow 2 */
 .project-card:hover { box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1) }
-
-/* Tag list */
-
-#projects > ul > li > ul:last-of-type, #post header ul, .faq-accordion footer ul, .project-card footer ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    color: var(--color-secondary);
-    font-size: var(--font-size-caption);
-}
-
-#projects > ul > li > ul:last-of-type li, #post header ul:first-of-type li, .faq-accordion footer li, .project-card footer li {
-    background-color: #f0f5f9;
-    padding: calc(var(--space-xs) / 2) var(--space-sm);
-}
 
 /* Project list */
 
@@ -457,6 +429,7 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
+    line-height: 1.5;
 }
 
 .prose ul, .prose ol {
@@ -470,7 +443,7 @@ h3, .text-h3, #hero h2, #benefits h3, #post h3, #related h2, .project-card h2 {
     font-size: var(--font-size-small);
 }
 
-.prose--code code { font-size: 90% } /* Default code font size */
+.prose--code code { font-size: 90% } /* 'Monospace' too large @ 100% */
 
 /****************/
 /*    LAYOUT    */

@@ -47,6 +47,8 @@
 
 #hero div:first-of-type { margin-bottom: var(--space-lg) }
 
+#hero ul { justify-content: center }
+
 @media (min-width: 48rem) {
     #hero div:first-of-type { margin-bottom: 0 }
 }
@@ -60,8 +62,6 @@
 
 #hero div li {
     display: inline-block;
-    background-color: #dddddd;
-    padding: 0 calc(var(--space-xs) / 2);
     margin-right: var(--space-sm);
 }
 
@@ -190,13 +190,12 @@
 
 #posts li {
     border-top: calc(var(--space-xs) / 2) solid var(--color-secondary);
+    background-color: white;
     max-width: 360px;
+    flex: 1 1 360px;
 }
 
-#posts main {
-    background-color: white;
-    padding: var(--space-md);
-}
+#posts main { padding: var(--space-md) }
 
 #posts main p { margin-bottom: var(--space-sm) }
 

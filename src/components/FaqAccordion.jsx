@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import markdownToHtml from "../utils/markdown-to-html";
 import getRelativeTime from "../utils/get-relative-time";
+import BadgeList from "./BadgeList";
 
 /**
  * @typedef {Object} Faq
@@ -35,11 +36,9 @@ const FaqItem = memo(({ faq, isOpen, onClick }) => (
       <section>
         <main dangerouslySetInnerHTML={{ __html: markdownToHtml(faq.answer) }} />
         <footer>
-          <cite>{faq.category}</cite>
+          <cite className="badge--primary">{faq.category}</cite>
           <time dateTime={faq.addedDate}>{getRelativeTime(faq.addedDate)}</time>
-          {faq.tags?.length > 0 && <ul>
-            {faq.tags.map(tag => <li key={tag}>{tag}</li>)}
-          </ul>}
+          {faq.tags?.length > 0 && <BadgeList items={faq.tags} />}
           {faq.source && <span hidden>{faq.source}</span>}
         </footer>
       </section>
