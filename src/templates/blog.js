@@ -7,6 +7,7 @@ import "../styles/blog.css";
 import MainLayout from "../layout/MainLayout";
 import Toast from "../components/Toast";
 import getRelativeTime from "../utils/get-relative-time";
+import BadgeList from "../components/BadgeList";
 
 export const query = graphql`
   query BlogPostAndRelated($slug: String! = "my-first-post") {
@@ -97,8 +98,8 @@ export default function BlogPost({ data }) {
     <MainLayout>
       {showToast && <Toast open={showToast} message="Copied to clipboard!" />}
       <article id="post">
-        <header>
-          <h1>{frontmatter.title}</h1>
+        <header className="text-small">
+          <h1 className="text-h1">{frontmatter.title}</h1>
           <StaticImage src="../images/profile-pic.jpg" alt="Profile picture" placeholder="blurred" layout="fixed"
                        width={56} height={56} />
           <p>
@@ -106,12 +107,10 @@ export default function BlogPost({ data }) {
               <time dateTime={frontmatter.date}>{getRelativeTime(frontmatter.date)}</time>
             </button>
             {" "}· By <address>Thiago Villa</address>
-            {" "}<strong><span hidden>In</span> {frontmatter.category}</strong>
+            {" "}<strong className="badge--primary"><span hidden>In</span> {frontmatter.category}</strong>
           </p>
-          <ul>
-            {frontmatter.tags?.map(tag => <li key={tag}>#{tag}</li>)}
-          </ul>
-          <ul>
+          <BadgeList items={frontmatter.tags} prefix="#" />
+          <ul className="badge-list">
             {socials.map(social => (
               <li key={social.link}>
                 <a href={social.link} target="_blank" rel="noopener noreferrer">
@@ -165,7 +164,7 @@ export default function BlogPost({ data }) {
       </section>
 
       <section id="related">
-        <h2>Latest Posts</h2>
+        <h2 className="text-h3">Latest Posts</h2>
         <ul>
           {data.relatedPosts.nodes.map(post => (
             <li key={post.fields.slug}>
@@ -177,7 +176,7 @@ export default function BlogPost({ data }) {
                   />
                 )}
                 <main>
-                  <h3>{post.frontmatter.title}</h3>
+                  <h3 className="text-large">{post.frontmatter.title}</h3>
                   <time dateTime={post.frontmatter.date}>
                     {getRelativeTime(post.frontmatter.date)}
                   </time>

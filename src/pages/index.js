@@ -8,6 +8,7 @@ import BaseLayout from "../layout/BaseLayout";
 import getRelativeTime from "../utils/get-relative-time";
 import FaqAccordion from "../components/FaqAccordion";
 import ProjectCard from "../components/ProjectCard";
+import BadgeList from "../components/BadgeList";
 
 export const query = graphql`
   query LatestPostsAndFaqs {
@@ -109,38 +110,25 @@ const IndexPage = ({ data }) => {
     <BaseLayout>
       <div className="container">
         <section id="hero">
-          <h1>Building Sturdy, Scalable Software—Strong Foundations. Lasting Software.</h1>
-          <p>I build sturdy, structured, and scalable software—designed to grow, adapt, and withstand the test of time.
+          <h1 className="text-h1">Building Sturdy, Scalable Software—Strong Foundations. Lasting Software.</h1>
+          <p className="text-large">I build sturdy, structured, and scalable software—designed to grow, adapt, and
+            withstand the test of time.
             Let's build your product to last.</p>
           <ul className="list-inline">
             <li><a href="/#contact" className="pure-button pure-button-primary">Work With Me</a></li>
             <li><a href="https://linkedin.com/in/othiagovilla" className="pure-button">Check My LinkedIn</a></li>
           </ul>
-          <blockquote>
+          <blockquote className="text-small">
             "Thiago approached each task with a high level of thoroughness, ensuring nothing was overlooked."
             <cite>Tyler Shambora</cite>
           </blockquote>
           <div className="pure-u-lg-1-2">
-            <h2 className="text-h2 home-h2">Main Stack</h2>
-            <ul className="list-inline">
-              {[
-                "Node",
-                "React",
-                "AWS",
-                "CI/CD",
-                "SCRUM"
-              ].map((tech) => (<li key={tech}>{tech}</li>))}
-            </ul>
+            <h2 className="text-h3 home-h2">Main Stack</h2>
+            <BadgeList items={["Node", "React", "AWS", "CI/CD", "SCRUM"]} />
           </div>
           <div className="pure-u-lg-1-2">
-            <h2 className="text-h2 home-h2">Trusted by cloud-native innovators</h2>
-            <ul className="list-inline">
-              {[
-                "The Meet Group",
-                "Pack Digital",
-                "Escala App"
-              ].map((client) => (<li key={client}>{client}</li>))}
-            </ul>
+            <h2 className="text-h3 home-h2">Trusted by cloud-native innovators</h2>
+            <BadgeList items={["The Meet Group", "Pack Digital", "Escala App"]} />
           </div>
         </section>
         <section id="benefits">
@@ -165,7 +153,7 @@ const IndexPage = ({ data }) => {
             ].map((benefit) => (
               <li key={benefit.title}>
                 <span role="img" aria-label={benefit.title}>{benefit.icon}</span>
-                <h3>{benefit.title}</h3>
+                <h3 className="text-h3">{benefit.title}</h3>
                 <p>{benefit.description}</p>
               </li>
             ))}
@@ -174,7 +162,7 @@ const IndexPage = ({ data }) => {
       </div>
       <section id="projects">
         <h2 className="text-h2 home-h2">Driving Efficiency & Long-Term Stability</h2>
-        <p>Check out some of my clients' success stories.</p>
+        <p className="text-large">Check out some of my clients' success stories.</p>
         <ul>
           {data.projects.nodes.map((project) => (
             <li key={project.slug}>
@@ -206,7 +194,7 @@ const IndexPage = ({ data }) => {
                 <main>
                   <p className="text-small">
                     <time dateTime={post.frontmatter.date}>{getRelativeTime(post.frontmatter.date)}</time>
-                    <strong className="badge">{post.frontmatter.category}</strong>
+                    <strong className="badge--primary">{post.frontmatter.category}</strong>
                   </p>
                   <h3>{post.frontmatter.title}</h3>
                 </main>
