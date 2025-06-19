@@ -106,6 +106,18 @@ const IndexPage = ({ data }) => {
       description: "I build tools that save time and reduce manual work—and avoid projects that exploit addictive algorithms."
     }
   ];
+
+  function handleSubmit(e) {
+    e.preventDefault();
+      // Honeypot field. Don't submit if filled out.
+    if (e.target.website.value) return;
+    // Random string names (mostly uppercase, 10+ chars)
+    if (/^[a-zA-Z]{10,}$/.test(e.target.SingleLine.value)) return;
+    // Empty or whitespace-only messages
+    if (e.target.MultiLine.value.trim().length === 0) return;
+    e.target.submit();
+  }
+
   return (
     <BaseLayout>
       <div className="container">
@@ -318,9 +330,11 @@ const IndexPage = ({ data }) => {
             </a></dd>
           </dl>
           <form
+            onSubmit={handleSubmit}
             action="https://forms.zohopublic.com/thiagothiag1/form/HireThiagoNow/formperma/kdKqnSM0XdbmTTA-H2YVvCPrwm6SE_G55Bawn-p9PXw/htmlRecords/submit"
             method="POST" acceptCharset="UTF-8" encType="multipart/form-data"
             className="pure-u-lg-1-2">
+            <input type="text" name="website" style={{ display: "none" }} tabIndex="-1" autoComplete="off" />
             <input type="hidden" name="zf_referrer_name" value="" />
             <input type="hidden" name="zf_redirect_url" value="" />
             <input type="hidden" name="zc_gad" value="" />
