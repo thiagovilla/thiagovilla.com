@@ -1,7 +1,14 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { PiEnvelope, PiGlobe, PiLinkedinLogo } from "react-icons/pi";
+import {
+  PiCalendarBlank,
+  PiChatCircleDots,
+  PiEnvelope,
+  PiGlobe,
+  PiLinkedinLogo,
+  PiPlayFill
+} from "react-icons/pi";
 
 import "../styles/index.css";
 import BaseLayout from "../layout/BaseLayout";
@@ -32,16 +39,16 @@ export const query = graphql`
         }
       }
     }
-              projects: allProjectsYaml(limit: 3) {
-                nodes {
-                  slug
-                  title
-                  excerpt
-                  description
-                  skills
-                  techStack
-                }
-              }
+    projects: allProjectsYaml(limit: 3) {
+      nodes {
+        slug
+        title
+        excerpt
+        description
+        skills
+        techStack
+      }
+    }
     allFaqsJson(filter: {featured: {eq: true}}) {
       nodes {
         slug
@@ -55,9 +62,131 @@ export const query = graphql`
       }
     }
   }
- `;
+`;
+
+function HeroVideo({ videoId }) {
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  if (isPlaying) {
+    return (
+      <div className="hero-video-wrapper">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
+          title="Thiago Villa - Senior Fullstack Software Engineer Intro Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="hero-video-iframe"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="hero-video-wrapper">
+      <button
+        type="button"
+        className="hero-video-facade"
+        onClick={() => setIsPlaying(true)}
+        aria-label="Play introduction video"
+      >
+        <img
+          src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+          alt="Introduction Video Thumbnail"
+          className="hero-video-thumbnail"
+          loading="lazy"
+        />
+        <div className="hero-video-overlay">
+          <div className="hero-video-play-btn" aria-hidden="true">
+            <PiPlayFill size={34} style={{ marginLeft: "4px" }} />
+          </div>
+          <span className="hero-video-tag">
+            <span className="status-beacon" aria-hidden="true" />
+            Watch 1-min Intro Video
+          </span>
+        </div>
+      </button>
+    </div>
+  );
+}
 
 const IndexPage = ({ data }) => {
+  const calendlyUrl =
+    (typeof process !== "undefined" && process.env.GATSBY_CALENDLY_URL) ||
+    "https://calendly.com/thiagovilla/30-minute-meeting";
+  const introVideoId =
+    (typeof process !== "undefined" && process.env.GATSBY_INTRO_VIDEO_ID) ||
+    "dQw4w9WgXcQ";
+
+  const [isCrispOnline, setIsCrispOnline] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const crispWebsiteId =
+      (typeof process !== "undefined" && process.env.GATSBY_CRISP_WEBSITE_ID) ||
+      (typeof window !== "undefined" && window.CRISP_WEBSITE_ID) ||
+      "18048123-df38-4bdc-a209-df2193b167b6";
+
+    const updateStatus = (status) => {
+      if (status === "online" || status === true || status === "available") {
+        setIsCrispOnline(true);
+      } else if (status === "offline" || status === false || status === "away") {
+        setIsCrispOnline(false);
+      }
+    };
+
+    // 1. Crisp JavaScript SDK listener and status getter
+    if (window.$crisp) {
+      window.$crisp.push([
+        "on",
+        "website:availability:changed",
+        (status) => updateStatus(status)
+      ]);
+      try {
+        const currentStatus = window.$crisp.get("website:availability:status");
+        if (currentStatus) {
+          updateStatus(currentStatus);
+        }
+      } catch (e) {}
+    }
+
+    // 2. Crisp availability endpoint check
+    const endpoint =
+      (typeof process !== "undefined" && process.env.GATSBY_CRISP_STATUS_ENDPOINT) ||
+      (crispWebsiteId ? `https://client.crisp.chat/settings/website/${crispWebsiteId}/` : null);
+
+    if (endpoint) {
+      fetch(endpoint)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((payload) => {
+          if (payload) {
+            const status =
+              payload?.data?.status ||
+              payload?.data?.availability ||
+              payload?.status ||
+              payload?.availability;
+            const isOnline =
+              status === "online" || status === true || payload?.online === true;
+            updateStatus(isOnline);
+          }
+        })
+        .catch(() => {});
+    }
+  }, []);
+
+  const handleOpenChat = () => {
+    if (typeof window !== "undefined" && window.$crisp) {
+      window.$crisp.push(["do", "chat:open"]);
+    } else {
+      const contactEl = document.getElementById("contact");
+      if (contactEl) {
+        contactEl.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = "/#contact";
+      }
+    }
+  };
+
   const features = [
     {
       title: "Engineering-Driven Problem Solving",
@@ -122,25 +251,107 @@ const IndexPage = ({ data }) => {
     <BaseLayout>
       <div className="container">
         <section id="hero">
-          <h1 className="text-h1">Building Sturdy, Scalable Software—Strong Foundations. Lasting Software.</h1>
-          <p className="text-large">I build sturdy, structured, and scalable software—designed to grow, adapt, and
-            withstand the test of time.
-            Let's build your product to last.</p>
-          <ul className="list-inline">
-            <li><a href="/#contact" className="pure-button pure-button-primary">Work With Me</a></li>
-            <li><a href="https://linkedin.com/in/othiagovilla" className="pure-button">Check My LinkedIn</a></li>
-          </ul>
-          <blockquote className="text-small">
-            "Thiago approached each task with a high level of thoroughness, ensuring nothing was overlooked."
-            <cite>Tyler Shambora</cite>
-          </blockquote>
-          <div className="pure-u-lg-1-2">
-            <h2 className="text-h3 home-h2">Main Stack</h2>
-            <BadgeList items={["Node", "React", "AWS", "CI/CD", "SCRUM"]} />
+          <div className="hero-grid pure-g">
+            <div className="pure-u-1 pure-u-lg-13-24 hero-content-col">
+              <div className="hero-availability">
+                <span className="hero-availability-text">Available for immediate start</span>
+              </div>
+              <h1 className="text-h1 hero-title">
+                Building <em>Sturdy Software</em> That Lasts.
+              </h1>
+              <p className="text-large hero-subtitle">
+                I'm <strong>Thiago Villa</strong>, a Senior Fullstack Software Engineer &amp; Architect. I engineer robust, scalable systems that withstand stress, eliminate tech debt, and drive tangible business outcomes.
+              </p>
+              <div className="hero-cta-group">
+                {isCrispOnline ? (
+                  <button
+                    type="button"
+                    onClick={handleOpenChat}
+                    className="pure-button pure-button-primary hero-btn-primary"
+                    aria-label="Start live chat"
+                  >
+                    <span className="status-beacon" aria-hidden="true" style={{ marginRight: "8px" }} />
+                    <PiChatCircleDots size={20} style={{ verticalAlign: "middle", marginRight: "6px" }} />
+                    Live Chat
+                  </button>
+                ) : (
+                  <a
+                    href={calendlyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pure-button pure-button-primary hero-btn-primary"
+                  >
+                    <PiCalendarBlank size={20} style={{ verticalAlign: "middle", marginRight: "6px" }} />
+                    Book Intro Call
+                  </a>
+                )}
+                <a
+                  href="https://linkedin.com/in/othiagovilla"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pure-button hero-btn-secondary"
+                >
+                  <PiLinkedinLogo size={20} style={{ verticalAlign: "middle", marginRight: "6px" }} />
+                  Check LinkedIn
+                </a>
+              </div>
+              <blockquote className="hero-quote">
+                "Thiago approached each task with a high level of thoroughness, ensuring nothing was overlooked."
+                <cite>Tyler Shambora &mdash; VP of Engineering</cite>
+              </blockquote>
+            </div>
+            <div className="pure-u-1 pure-u-lg-11-24 hero-media-col">
+              <HeroVideo
+                videoId={introVideoId}
+              />
+            </div>
           </div>
-          <div className="pure-u-lg-1-2">
-            <h2 className="text-h3 home-h2">Trusted by cloud-native innovators</h2>
-            <BadgeList items={["The Meet Group", "Pack Digital", "Escala App"]} />
+          <div className="hero-trust-bar pure-g">
+            <div className="pure-u-1 pure-u-md-1-2">
+              <h2 className="text-h3 home-h2">Core Stack &amp; Practices</h2>
+              <BadgeList items={["TypeScript / Node.js", "React / Next.js", "AWS & Cloud-Native", "Clean Architecture & DDD", "CI/CD & DevOps"]} />
+            </div>
+            <div className="pure-u-1 pure-u-md-1-2">
+              <h2 className="text-h3 home-h2">Trusted by cloud-native innovators</h2>
+              <BadgeList items={["The Meet Group", "Pack Digital", "Escala App"]} />
+            </div>
+          </div>
+        </section>
+        <section id="personal-story">
+          <div className="story-header text-center">
+            <h2 className="text-h2 home-h2">From Physical Systems to Sturdy Software</h2>
+            <p className="text-large story-lead">
+              How multidisciplinary engineering and physical discipline shaped a philosophy of resilient, high-utility software craftsmanship.
+            </p>
+          </div>
+          <div className="story-grid pure-g">
+            <div className="pure-u-1 pure-u-lg-1-3 story-card">
+              <div className="story-card-inner">
+                <span className="story-icon" role="img" aria-label="Sprout to computer">🌱 ➔ 💻</span>
+                <h3 className="text-h3">Multidisciplinary Roots</h3>
+                <p>
+                  My background spans <strong>Computer, Biosystems, and Agricultural Engineering</strong>. Working with physical systems—where sensors, climate variables, and hardware constraints cannot be mocked—taught me early on that systems must be built to endure harsh real-world stress, not just clean test harnesses.
+                </p>
+              </div>
+            </div>
+            <div className="pure-u-1 pure-u-lg-1-3 story-card">
+              <div className="story-card-inner">
+                <span className="story-icon" role="img" aria-label="Architecture">🏛️</span>
+                <h3 className="text-h3">Resilient Architectures</h3>
+                <p>
+                  I translate this foundational discipline into software systems. Whether architecting cloud-native microservices, high-throughput Node.js pipelines, or modular monoliths, I apply <strong>Domain-Driven Design (DDD)</strong>, <strong>Clean Architecture</strong>, and strict decoupling so platforms scale predictably with business growth.
+                </p>
+              </div>
+            </div>
+            <div className="pure-u-1 pure-u-lg-1-3 story-card">
+              <div className="story-card-inner">
+                <span className="story-icon" role="img" aria-label="Partnership">🤝</span>
+                <h3 className="text-h3">Pragmatic Leadership</h3>
+                <p>
+                  Engineering is about maximizing business velocity while reducing maintenance burden. I collaborate closely with engineering teams through transparent communication, automated CI/CD pipelines, and zero bureaucracy—shipping dependable software that compounds in value over time.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
         <section id="benefits">
@@ -261,21 +472,35 @@ const IndexPage = ({ data }) => {
         </div>
       </section>
       <section id="sturdy-software">
-        <div>
-          <h2 className="text-h2 home-h2">Why Sturdy Software Matters?</h2>
-          <p>I believe software should be <strong>strong</strong>—more than just functional, it must be resilient,
-            structured, and built
-            to last.</p>
-          <p>In bodybuilding, a well-trained body is more than aesthetics. Strength comes from discipline, well-built
-            foundations, and the ability to handle stress.</p>
-          <p>The same applies to software. Sturdy software handles load, scales with growth, and remains reliable
-            under pressure.</p>
-          <p>Most software I've seen is fragile. Fix one thing, break another. Bugs pop out of nowhere, tech debt
-            piles up, and releases fail in production. But I build software differently.</p>
-          <p>Strength comes from design. A strong body is sculpted with purposeful training—software should be the
-            same. With a clear engineering vision, we can move from an MVP to a solid, maintainable system without
-            losing agility.</p>
-          <p>If you want your software to be sturdy, I'm the one to build it.</p>
+        <div className="container">
+          <div className="sturdy-inner">
+            <h2 className="text-h2 home-h2">Why Sturdy Software Matters</h2>
+            <p className="sturdy-manifesto">
+              I believe software should be <strong>sturdy</strong>—more than just functional in the moment, it must be resilient, structured, and architected to endure.
+            </p>
+            <div className="sturdy-body">
+              <p>
+                In bodybuilding and athletic training, true physical strength is never just superficial aesthetics. Strength is forged through rigorous discipline, purposeful mechanical tension, and the capacity to absorb stress without breaking down.
+              </p>
+              <p>
+                The exact same principle applies to software systems. Sturdy software handles sudden traffic surges, absorbs evolving business requirements, and remains predictable under pressure.
+              </p>
+              <p>
+                Most systems fail because they are built for short-term demos instead of long-term maintainability—bugs multiply, technical debt suffocates delivery velocity, and deployments turn into stressful emergencies. I build software differently: establishing clean domain boundaries, test coverage, and automated delivery so your team moves fast with complete confidence.
+              </p>
+            </div>
+            <div className="sturdy-cta text-center">
+              <a
+                href={calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pure-button pure-button-primary hero-btn-primary"
+              >
+                <PiCalendarBlank size={20} style={{ verticalAlign: "middle", marginRight: "6px" }} />
+                Book an Intro Call
+              </a>
+            </div>
+          </div>
         </div>
       </section>
       <section id="why-tech">
@@ -302,6 +527,20 @@ const IndexPage = ({ data }) => {
         <section id="contact">
           <h2 className="text-h2 home-h2">Work With Me</h2>
           <dl className="pure-u-lg-1-2">
+            <dt className="text-h3 pure-u-lg-1-3"><PiCalendarBlank size={24} style={{ verticalAlign: "middle" }} /> Schedule</dt>
+            <dd className="pure-u-lg-2-3">
+              <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" className="btn-link">
+                Book Intro Call on Calendly
+              </a>
+            </dd>
+            <dt className="text-h3 pure-u-lg-1-3"><PiLinkedinLogo size={24} style={{ verticalAlign: "middle" }} /> LinkedIn</dt>
+            <dd className="pure-u-lg-2-3"><a
+              href="https://linkedin.com/in/othiagovilla"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              othiagovilla
+            </a></dd>
             <dt className="text-h3 pure-u-lg-1-3"><PiEnvelope size={24} style={{ verticalAlign: "middle" }} /> Email
             </dt>
             <dd className="pure-u-lg-2-3">
@@ -318,16 +557,6 @@ const IndexPage = ({ data }) => {
             </dd>
             <dt className="text-h3 pure-u-lg-1-3"><PiGlobe size={24} style={{ verticalAlign: "middle" }} /> Website</dt>
             <dd className="pure-u-lg-2-3"><a href="https://thiagovilla.com">thiagovilla.com</a></dd>
-            <dt className="text-h3 pure-u-lg-1-3"><PiLinkedinLogo size={24}
-                                                                  style={{ verticalAlign: "middle" }} /> LinkedIn
-            </dt>
-            <dd className="pure-u-lg-2-3"><a
-              href="https://linkedin.com/in/othiagovilla"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              othiagovilla
-            </a></dd>
           </dl>
           <form
             onSubmit={handleSubmit}

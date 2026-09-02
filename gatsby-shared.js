@@ -1,7 +1,7 @@
 import React from "react";
 
 export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
-  setHeadComponents([
+  const headComponents = [
     <link
       key="purecss"
       rel="stylesheet"
@@ -30,7 +30,23 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       crossOrigin="anonymous"
       referrerPolicy="no-referrer"
     />
-  ]);
+  ];
+
+  const crispWebsiteId = process.env.GATSBY_CRISP_WEBSITE_ID;
+
+  if (crispWebsiteId) {
+    headComponents.push(
+      <script
+        key="crisp-chat"
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="${crispWebsiteId}";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
+        }}
+      />
+    );
+  }
+
+  setHeadComponents(headComponents);
 
   setPostBodyComponents([
     <div key="toast-portal" id="toast-portal"></div>,

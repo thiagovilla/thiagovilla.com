@@ -12,6 +12,8 @@ module.exports = {
       role: `Senior Fullstack Software Engineering Consultant`,
       bio: `I build sturdy, structured, and scalable software designed to grow, adapt, and withstand the test of time.`,
       email: `thiago@thiagovilla.com`,
+      calendly: process.env.GATSBY_CALENDLY_URL || `https://calendly.com/thiagovilla/30-minute-meeting`,
+      crispWebsiteId: process.env.GATSBY_CRISP_WEBSITE_ID || `18048123-df38-4bdc-a209-df2193b167b6`,
       social: {
         linkedin: `https://linkedin.com/in/othiagovilla`,
         github: `https://github.com/thiagovilla`,
@@ -28,6 +30,14 @@ module.exports = {
         path: "./src/pages/"
       },
       __key: "pages"
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: "./src/images/"
+      },
+      __key: "images"
     },
     {
       resolve: `gatsby-source-filesystem`,

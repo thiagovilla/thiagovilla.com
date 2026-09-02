@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to the Mohs hardness scale for versioning, starting with Talc (hardness 1).
 
-## [Unreleased] - [Talc 2]
+## [Unreleased] - [Realgar 1] - 2026-09-02
+
+### Added
+- Homepage hero section with intro video and live chat primary CTA (if online, otherwise fallback to Calendly intro call scheduling) and LinkedIn secondary CTA
+- Crisp live chat widget integration via `gatsby-shared.js` using Crisp API availability endpoint
+
+## [Talc 2]
 
 ### Removed
 - External source plugins (DatoCMS, Google Docs, Dropbox) for May 2025 EOM launch

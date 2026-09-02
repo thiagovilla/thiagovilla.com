@@ -456,13 +456,52 @@ a.color-inherit { color: inherit }
     color: white;
     font-weight: 600;
     font-size: 0.95rem;
+    padding: var(--space-xs) var(--space-md);
+    text-align: center;
 }
 
-#promo-bar a {
-    display: block;
-    padding: var(--space-sm) var(--space-xl);
-    text-align: center;
+.promo-bar-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.promo-bar-link {
     color: white;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.promo-bar-link:hover {
+    color: var(--color-light);
+}
+
+/* STATUS BEACON */
+
+.status-beacon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #2ecc71;
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    animation: status-pulse 2s infinite;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+@keyframes status-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(46, 204, 113, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+    }
 }
 
 /* FOOTER */

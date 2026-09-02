@@ -4,9 +4,23 @@ import "../styles/main.css";
 import { PiLinkedinLogo } from "react-icons/pi";
 
 function PromoBar() {
+  const calendlyUrl = typeof process !== "undefined" && process.env.GATSBY_CALENDLY_URL
+    ? process.env.GATSBY_CALENDLY_URL
+    : "https://calendly.com/thiagovilla/30-minute-meeting";
+
   return (
     <section id="promo-bar">
-      <a href="/#contact">I'm available for hiring. <span style={{ textDecoration: "underline" }}>Hire now</span>.</a>
+      <div className="promo-bar-content">
+          <strong>Available for  immediate start!</strong> &mdash;{" "}
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="promo-bar-link"
+          >
+            Schedule Intro Call
+          </a>
+      </div>
     </section>
   );
 }
