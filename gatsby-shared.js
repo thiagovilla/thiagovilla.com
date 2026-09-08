@@ -29,23 +29,16 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ=="
       crossOrigin="anonymous"
       referrerPolicy="no-referrer"
+    />,
+    <script
+      key="crisp-chat"
+      type="text/javascript"
+      dangerouslySetInnerHTML={{
+        // process.env.GATSBY_CRISP_WEBSITE_ID is required in gatsby-config.js (assume it is set)
+        __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="${process.env.GATSBY_CRISP_WEBSITE_ID}";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
+      }}
     />
   ];
-
-  const crispWebsiteId = process.env.GATSBY_CRISP_WEBSITE_ID;
-
-  if (crispWebsiteId) {
-    headComponents.push(
-      <script
-        key="crisp-chat"
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="${crispWebsiteId}";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
-        }}
-      />
-    );
-  }
-
   setHeadComponents(headComponents);
 
   setPostBodyComponents([

@@ -19,6 +19,13 @@ import BadgeList from "../components/BadgeList";
 
 export const query = graphql`
   query LatestPostsAndFaqs {
+    site {
+      siteMetadata {
+        introVideoId
+        calendlyUrl
+        crispWebsiteId
+      }
+    }
     latestPosts: allMarkdownRemark(
       sort: {fields: frontmatter___date, order: DESC}
       limit: 3
@@ -110,22 +117,12 @@ function HeroVideo({ videoId }) {
 }
 
 const IndexPage = ({ data }) => {
-  const calendlyUrl =
-    (typeof process !== "undefined" && process.env.GATSBY_CALENDLY_URL) ||
-    "https://calendly.com/thiagovilla/30-minute-meeting";
-  const introVideoId =
-    (typeof process !== "undefined" && process.env.GATSBY_INTRO_VIDEO_ID) ||
-    "dQw4w9WgXcQ";
+  const { introVideoId, calendlyUrl, crispWebsiteId } = data.site.siteMetadata;
 
   const [isCrispOnline, setIsCrispOnline] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-
-    const crispWebsiteId =
-      (typeof process !== "undefined" && process.env.GATSBY_CRISP_WEBSITE_ID) ||
-      (typeof window !== "undefined" && window.CRISP_WEBSITE_ID) ||
-      "18048123-df38-4bdc-a209-df2193b167b6";
 
     const updateStatus = (status) => {
       if (status === "online" || status === true || status === "available") {

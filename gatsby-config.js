@@ -6,14 +6,16 @@ require("dotenv").config();
 module.exports = {
   siteMetadata: {
     title: `Thiago Villa - Senior Fullstack Software Engineer`,
+    description: `Thiago Villa - Senior Fullstack Software Engineer & Architect`,
     siteUrl: `https://thiagovilla.com`,
+    introVideoId: `dKEtSKchhHg`,
+    calendlyUrl: `https://calendly.com/thiagovilla/30-minute-meeting`,
+    crispWebsiteId: `18048123-df38-4bdc-a209-df2193b167b6`,
     author: {
       name: `Thiago Villa`,
       role: `Senior Fullstack Software Engineering Consultant`,
       bio: `I build sturdy, structured, and scalable software designed to grow, adapt, and withstand the test of time.`,
       email: `thiago@thiagovilla.com`,
-      calendly: process.env.GATSBY_CALENDLY_URL || `https://calendly.com/thiagovilla/30-minute-meeting`,
-      crispWebsiteId: process.env.GATSBY_CRISP_WEBSITE_ID || `18048123-df38-4bdc-a209-df2193b167b6`,
       social: {
         linkedin: `https://linkedin.com/in/othiagovilla`,
         github: `https://github.com/thiagovilla`,

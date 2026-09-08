@@ -1,12 +1,21 @@
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 
 import "../styles/main.css";
 import { PiLinkedinLogo } from "react-icons/pi";
 
 function PromoBar() {
-  const calendlyUrl = typeof process !== "undefined" && process.env.GATSBY_CALENDLY_URL
-    ? process.env.GATSBY_CALENDLY_URL
-    : "https://calendly.com/thiagovilla/30-minute-meeting";
+  const data = useStaticQuery(graphql`
+    query PromoBarSiteMetadata {
+      site {
+        siteMetadata {
+          calendlyUrl
+        }
+      }
+    }
+  `);
+
+  const calendlyUrl = data.site.siteMetadata.calendlyUrl;
 
   return (
     <section id="promo-bar">
