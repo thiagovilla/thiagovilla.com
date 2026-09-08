@@ -159,9 +159,31 @@ a.color-inherit { color: inherit }
 
 /* PURECSS OVERWRITES */
 
+.pure-button {
+    border-radius: 0 !important;
+    position: relative;
+}
+
+.pure-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 0;
+    border-color: transparent var(--color-accent) transparent transparent;
+    pointer-events: none;
+}
+
 .pure-button:hover { color: var(--color-primary) }
 
 .pure-button-primary { background-color: var(--color-accent) !important }
+
+.pure-button-primary::after {
+    border-color: transparent #ffffff transparent transparent;
+}
 
 /* Menu Styles */
 .home-menu {
@@ -411,7 +433,7 @@ a.color-inherit { color: inherit }
     justify-content: center;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 0;
     background-color: var(--background-medium);
     color: var(--color-primary);
     transition: all 0.2s ease;

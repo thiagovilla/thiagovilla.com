@@ -68,7 +68,7 @@
 #proj-dets aside section {
   background: #fff;
   padding: var(--space-lg);
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 #proj-dets aside h2 {
@@ -107,7 +107,7 @@
 #proj-dets footer li {
   background: white;
   padding: var(--space-lg);
-  border-radius: 4px;
+  border-radius: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
