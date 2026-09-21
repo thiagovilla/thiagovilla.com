@@ -1,4 +1,5 @@
 import React from "react";
+import config from './gatsby-config'
 
 export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
   const headComponents = [
@@ -34,8 +35,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       key="crisp-chat"
       type="text/javascript"
       dangerouslySetInnerHTML={{
-        // process.env.GATSBY_CRISP_WEBSITE_ID is required in gatsby-config.js (assume it is set)
-        __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="${process.env.GATSBY_CRISP_WEBSITE_ID}";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
+        __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="${config.siteMetadata.crispWebsiteId}";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
       }}
     />
   ];
