@@ -18,57 +18,56 @@ import ProjectCard from "../components/ProjectCard";
 import BadgeList from "../components/BadgeList";
 
 export const query = graphql`
-  query LatestPostsAndFaqs {
-    site {
-      siteMetadata {
-        introVideoId
-        calendlyUrl
-        crispWebsiteId
-      }
-    }
-    latestPosts: allMarkdownRemark(
-      sort: {fields: frontmatter___date, order: DESC}
-      limit: 3
-    ) {
-      nodes {
-        frontmatter {
-          date
-          title
-          category
+    query LatestPostsAndFaqs {
+        site {
+            siteMetadata {
+                introVideoId
+                calendlyUrl
+            }
         }
-        fields {
-          slug
+        latestPosts: allMarkdownRemark(
+            sort: {fields: frontmatter___date, order: DESC}
+            limit: 3
+        ) {
+            nodes {
+                frontmatter {
+                    date
+                    title
+                    category
+                }
+                fields {
+                    slug
+                }
+                featuredImageFile {
+                    childImageSharp {
+                        gatsbyImageData(width: 360, layout: CONSTRAINED)
+                    }
+                }
+            }
         }
-        featuredImageFile {
-          childImageSharp {
-            gatsbyImageData(width: 360, layout: CONSTRAINED)
-          }
+        projects: allProjectsYaml(limit: 3) {
+            nodes {
+                slug
+                title
+                excerpt
+                description
+                skills
+                techStack
+            }
         }
-      }
+        allFaqsJson(filter: {featured: {eq: true}}) {
+            nodes {
+                slug
+                question
+                answer
+                category
+                tags
+                featured
+                addedDate
+                source
+            }
+        }
     }
-    projects: allProjectsYaml(limit: 3) {
-      nodes {
-        slug
-        title
-        excerpt
-        description
-        skills
-        techStack
-      }
-    }
-    allFaqsJson(filter: {featured: {eq: true}}) {
-      nodes {
-        slug
-        question
-        answer
-        category
-        tags
-        featured
-        addedDate
-        source
-      }
-    }
-  }
 `;
 
 function HeroVideo({ videoId }) {
@@ -117,58 +116,27 @@ function HeroVideo({ videoId }) {
 }
 
 const IndexPage = ({ data }) => {
-  const { introVideoId, calendlyUrl, crispWebsiteId } = data.site.siteMetadata;
+  const { introVideoId, calendlyUrl } = data.site.siteMetadata;
 
   const [isCrispOnline, setIsCrispOnline] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const updateStatus = (status) => {
-      if (status === "online" || status === true || status === "available") {
-        setIsCrispOnline(true);
-      } else if (status === "offline" || status === false || status === "away") {
-        setIsCrispOnline(false);
+    let isMounted = true;
+
+    const updateStatus = (isAvailable) => {
+      if (isMounted) {
+        setIsCrispOnline(Boolean(isAvailable));
       }
     };
 
-    // 1. Crisp JavaScript SDK listener and status getter
-    if (window.$crisp) {
-      window.$crisp.push([
-        "on",
-        "website:availability:changed",
-        (status) => updateStatus(status)
-      ]);
-      try {
-        const currentStatus = window.$crisp.get("website:availability:status");
-        if (currentStatus) {
-          updateStatus(currentStatus);
-        }
-      } catch (e) {}
-    }
+    window.$crisp = window.$crisp || [];
+    window.$crisp.push(["on", "website:availability:changed", updateStatus]);
 
-    // 2. Crisp availability endpoint check
-    const endpoint =
-      (typeof process !== "undefined" && process.env.GATSBY_CRISP_STATUS_ENDPOINT) ||
-      (crispWebsiteId ? `https://client.crisp.chat/settings/website/${crispWebsiteId}/` : null);
-
-    if (endpoint) {
-      fetch(endpoint)
-        .then((res) => (res.ok ? res.json() : null))
-        .then((payload) => {
-          if (payload) {
-            const status =
-              payload?.data?.status ||
-              payload?.data?.availability ||
-              payload?.status ||
-              payload?.availability;
-            const isOnline =
-              status === "online" || status === true || payload?.online === true;
-            updateStatus(isOnline);
-          }
-        })
-        .catch(() => {});
-    }
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleOpenChat = () => {
@@ -235,7 +203,7 @@ const IndexPage = ({ data }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-      // Honeypot field. Don't submit if filled out.
+    // Honeypot field. Don't submit if filled out.
     if (e.target.website.value) return;
     // Random string names (mostly uppercase, 10+ chars)
     if (/^[a-zA-Z]{10,}$/.test(e.target.SingleLine.value)) return;
@@ -257,7 +225,9 @@ const IndexPage = ({ data }) => {
                 Building <em>Sturdy Software</em> That Lasts.
               </h1>
               <p className="text-large hero-subtitle">
-                I'm <strong>Thiago Villa</strong>, a Senior Fullstack Software Engineer &amp; Architect. I engineer robust, scalable systems that withstand stress, eliminate tech debt, and drive tangible business outcomes.
+                I'm <strong>Thiago Villa</strong>, a Senior Fullstack Software Engineer &amp; Architect. I engineer
+                robust, scalable systems that withstand stress, eliminate tech debt, and drive tangible business
+                outcomes.
               </p>
               <div className="hero-cta-group">
                 {isCrispOnline ? (
@@ -306,7 +276,8 @@ const IndexPage = ({ data }) => {
           <div className="hero-trust-bar pure-g">
             <div className="pure-u-1 pure-u-md-1-2">
               <h2 className="text-h3 home-h2">Core Stack &amp; Practices</h2>
-              <BadgeList items={["TypeScript / Node.js", "React / Next.js", "AWS & Cloud-Native", "Clean Architecture & DDD", "CI/CD & DevOps"]} />
+              <BadgeList
+                items={["TypeScript / Node.js", "React / Next.js", "AWS & Cloud-Native", "Clean Architecture & DDD", "CI/CD & DevOps"]} />
             </div>
             <div className="pure-u-1 pure-u-md-1-2">
               <h2 className="text-h3 home-h2">Trusted by cloud-native innovators</h2>
@@ -318,7 +289,8 @@ const IndexPage = ({ data }) => {
           <div className="story-header text-center">
             <h2 className="text-h2 home-h2">From Physical Systems to Sturdy Software</h2>
             <p className="text-large story-lead">
-              How multidisciplinary engineering and physical discipline shaped a philosophy of resilient, high-utility software craftsmanship.
+              How multidisciplinary engineering and physical discipline shaped a philosophy of resilient, high-utility
+              software craftsmanship.
             </p>
           </div>
           <div className="story-grid pure-g">
@@ -327,7 +299,9 @@ const IndexPage = ({ data }) => {
                 <span className="story-icon" role="img" aria-label="Sprout to computer">🌱 ➔ 💻</span>
                 <h3 className="text-h3">Multidisciplinary Roots</h3>
                 <p>
-                  My background spans <strong>Computer, Biosystems, and Agricultural Engineering</strong>. Working with physical systems—where sensors, climate variables, and hardware constraints cannot be mocked—taught me early on that systems must be built to endure harsh real-world stress, not just clean test harnesses.
+                  My background spans <strong>Computer, Biosystems, and Agricultural Engineering</strong>. Working with
+                  physical systems—where sensors, climate variables, and hardware constraints cannot be mocked—taught me
+                  early on that systems must be built to endure harsh real-world stress, not just clean test harnesses.
                 </p>
               </div>
             </div>
@@ -336,7 +310,10 @@ const IndexPage = ({ data }) => {
                 <span className="story-icon" role="img" aria-label="Architecture">🏛️</span>
                 <h3 className="text-h3">Resilient Architectures</h3>
                 <p>
-                  I translate this foundational discipline into software systems. Whether architecting cloud-native microservices, high-throughput Node.js pipelines, or modular monoliths, I apply <strong>Domain-Driven Design (DDD)</strong>, <strong>Clean Architecture</strong>, and strict decoupling so platforms scale predictably with business growth.
+                  I translate this foundational discipline into software systems. Whether architecting cloud-native
+                  microservices, high-throughput Node.js pipelines, or modular monoliths, I apply <strong>Domain-Driven
+                  Design (DDD)</strong>, <strong>Clean Architecture</strong>, and strict decoupling so platforms scale
+                  predictably with business growth.
                 </p>
               </div>
             </div>
@@ -345,7 +322,9 @@ const IndexPage = ({ data }) => {
                 <span className="story-icon" role="img" aria-label="Partnership">🤝</span>
                 <h3 className="text-h3">Pragmatic Leadership</h3>
                 <p>
-                  Engineering is about maximizing business velocity while reducing maintenance burden. I collaborate closely with engineering teams through transparent communication, automated CI/CD pipelines, and zero bureaucracy—shipping dependable software that compounds in value over time.
+                  Engineering is about maximizing business velocity while reducing maintenance burden. I collaborate
+                  closely with engineering teams through transparent communication, automated CI/CD pipelines, and zero
+                  bureaucracy—shipping dependable software that compounds in value over time.
                 </p>
               </div>
             </div>
@@ -473,17 +452,24 @@ const IndexPage = ({ data }) => {
           <div className="sturdy-inner">
             <h2 className="text-h2 home-h2">Why Sturdy Software Matters</h2>
             <p className="sturdy-manifesto">
-              I believe software should be <strong>sturdy</strong>—more than just functional in the moment, it must be resilient, structured, and architected to endure.
+              I believe software should be <strong>sturdy</strong>—more than just functional in the moment, it must be
+              resilient, structured, and architected to endure.
             </p>
             <div className="sturdy-body">
               <p>
-                In bodybuilding and athletic training, true physical strength is never just superficial aesthetics. Strength is forged through rigorous discipline, purposeful mechanical tension, and the capacity to absorb stress without breaking down.
+                In bodybuilding and athletic training, true physical strength is never just superficial aesthetics.
+                Strength is forged through rigorous discipline, purposeful mechanical tension, and the capacity to
+                absorb stress without breaking down.
               </p>
               <p>
-                The exact same principle applies to software systems. Sturdy software handles sudden traffic surges, absorbs evolving business requirements, and remains predictable under pressure.
+                The exact same principle applies to software systems. Sturdy software handles sudden traffic surges,
+                absorbs evolving business requirements, and remains predictable under pressure.
               </p>
               <p>
-                Most systems fail because they are built for short-term demos instead of long-term maintainability—bugs multiply, technical debt suffocates delivery velocity, and deployments turn into stressful emergencies. I build software differently: establishing clean domain boundaries, test coverage, and automated delivery so your team moves fast with complete confidence.
+                Most systems fail because they are built for short-term demos instead of long-term maintainability—bugs
+                multiply, technical debt suffocates delivery velocity, and deployments turn into stressful emergencies.
+                I build software differently: establishing clean domain boundaries, test coverage, and automated
+                delivery so your team moves fast with complete confidence.
               </p>
             </div>
             <div className="sturdy-cta text-center">
@@ -524,13 +510,17 @@ const IndexPage = ({ data }) => {
         <section id="contact">
           <h2 className="text-h2 home-h2">Work With Me</h2>
           <dl className="pure-u-lg-1-2">
-            <dt className="text-h3 pure-u-lg-1-3"><PiCalendarBlank size={24} style={{ verticalAlign: "middle" }} /> Schedule</dt>
+            <dt className="text-h3 pure-u-lg-1-3"><PiCalendarBlank size={24}
+                                                                   style={{ verticalAlign: "middle" }} /> Schedule
+            </dt>
             <dd className="pure-u-lg-2-3">
               <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" className="btn-link">
                 Book Intro Call on Calendly
               </a>
             </dd>
-            <dt className="text-h3 pure-u-lg-1-3"><PiLinkedinLogo size={24} style={{ verticalAlign: "middle" }} /> LinkedIn</dt>
+            <dt className="text-h3 pure-u-lg-1-3"><PiLinkedinLogo size={24}
+                                                                  style={{ verticalAlign: "middle" }} /> LinkedIn
+            </dt>
             <dd className="pure-u-lg-2-3"><a
               href="https://linkedin.com/in/othiagovilla"
               target="_blank"
