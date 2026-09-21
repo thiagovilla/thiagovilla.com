@@ -104,10 +104,10 @@ function HeroVideo({ videoId }) {
         />
         <div className="hero-video-overlay">
           <div className="hero-video-play-btn" aria-hidden="true">
-            <PiPlayFill size={34} style={{ marginLeft: "4px" }} />
+            <PiPlayFill size={34} />
           </div>
           <span className="hero-video-tag">
-            <span className="status-beacon" aria-hidden="true" />
+            <span className="status-beacon" aria-hidden="true" style={{ marginRight: 4 }} />
             Watch 1-min Intro Video
           </span>
         </div>
